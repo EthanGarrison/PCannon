@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0242bce5a91fec34fab8563b87c4fc36
+guid: 2b71cf829ecd2414f9666304cc55171b
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -58,6 +58,15 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: cannon Parts_2
+      rect:
+        serializedVersion: 2
+        x: 512
         y: 0
         width: 256
         height: 256
