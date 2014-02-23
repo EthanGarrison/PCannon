@@ -53,16 +53,16 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
     - name: cannon Parts_1
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 256
+        width: 249
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
     - name: cannon Parts_2
       rect:
         serializedVersion: 2
@@ -71,6 +71,6 @@ TextureImporter:
         width: 256
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: .5, y: .5}
   spritePackingTag: 
   userData: 
