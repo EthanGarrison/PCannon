@@ -7,13 +7,14 @@ public class FireCannon : MonoBehaviour{
 	Animator animCannonFire;
 	//public Texture button;
 	public GUIStyle buttonStyle;
-	//public GUILayout button;
+	public Rigidbody2D ball;
 
 
 	// Use this for initialization
 	void Start () {
 		//gets the Animator Component
 		animCannonFire = GetComponent<Animator>();
+
 	}
 	// Update is called once per frame
 	void Update () {
@@ -24,7 +25,8 @@ public class FireCannon : MonoBehaviour{
 				if(GUI.Button(new Rect(393,379,67,22),"",buttonStyle)){
 				//if (GUI.Button(new Rect(393,379,67,22),button)){
 					animCannonFire.SetTrigger("cannonFireTrigger");
-				}
+					ball.AddForce (new Vector2 (80,10));
 		}
-
+		}
+		
 }

@@ -7,6 +7,10 @@ var bottomWall : BoxCollider2D;
 var leftWall : BoxCollider2D;
 var rightWall : BoxCollider2D;
 
+
+
+
+
 function Update () {
 	//Move each wall to its edge location
 	topWall.size = new Vector2 (mainCam.ScreenToWorldPoint(new Vector3(Screen.width * 2f,0f,0f)).x,1f);
