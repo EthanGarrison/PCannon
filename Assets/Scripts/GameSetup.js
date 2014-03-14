@@ -44,7 +44,7 @@ function Start () {
 
 function Update(){
 	//the distance between cannon and projectile
-	if (Mathf.Abs(-pos.x- ball.transform.position.x) > pos.x){
+	if (Mathf.Abs(-pos.x- ball.transform.position.x) > (pos.x*2)*(3/2)){
 		resetBall();
 	}
 }
