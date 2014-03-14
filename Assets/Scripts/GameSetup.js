@@ -7,6 +7,11 @@ var bottomWall : BoxCollider2D;
 var leftWall : BoxCollider2D;
 var rightWall : BoxCollider2D;
 var barrel : GameObject;
+var userInput : String;
+var userAnswer : float;
+var correctAnswer : float;
+var sideA : float;
+var sideB : float;
 
 //creates an Animator
 var animCannonFire : Animator ;
@@ -40,11 +45,13 @@ function Start () {
 	
 	rightWall.size = new Vector2 (1f,mainCam.ScreenToWorldPoint(new Vector3(0f,Screen.height * 2f,0f)).y);
 	rightWall.center = new Vector2 (mainCam.ScreenToWorldPoint(new Vector3(Screen.width,0f,0f)).x + 0.5, 0f);
+
+	generateNumbers();
 }
 
 function Update(){
 	//the distance between cannon and projectile
-	if (Mathf.Abs(-pos.x- ball.transform.position.x) > (pos.x*2)*(3/2)){
+	if (Mathf.Abs(-pos.x- ball.transform.position.x) > pos.x){
 		resetBall();
 	}
 }
@@ -56,6 +63,13 @@ function OnGUI () {
 		resetBall();
 		fireBall();
 	}
+
+	userInput = GUI.TextField (Rect (300, 10, 100, 20), userInput);
+	GUI.Label(Rect(300, 30, 100, 20), sideA.ToString());
+	GUI.Label(Rect(300,50,100,20), sideB.ToString());
+
+
+
 }
 
 //reloads the cannon
@@ -69,7 +83,32 @@ function resetBall(){
 
 //Animages the cannonBall and gives it velocity
 function fireBall(){
-	animCannonFire.SetTrigger("cannonFireTrigger");
-	ball.AddForce (new Vector2 (ballVelocity,ballAngle));
+	userAnswer = parseFloat(userInput);
+
+	if(userAnswer < correctAnswer){
+		//code for if it is less than the correct answer
+		//default code for now
+		
+	}
+	else if(userAnswer > correctAnswer){
+		//code for if it is less than the correct answer
+		//default code for now
+		
+	}
+	else{
+		//code for if it is the correct answer
+		//default code for now
+		animCannonFire.SetTrigger("cannonFireTrigger");
+		ball.AddForce (new Vector2 (ballVelocity,ballAngle));
+	}
+}
+
+function generateNumbers(){
+		
+	sideA = Mathf.Ceil(Random.value*100);
+
+	sideB = Mathf.Ceil(Random.value*100);
+
+	correctAnswer = Mathf.Floor(Mathf.Sqrt(Mathf.Pow(sideA,2) + Mathf.Pow(sideB,2)));
 }
 

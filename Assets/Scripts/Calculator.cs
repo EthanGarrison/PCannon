@@ -3,47 +3,51 @@ using System.Collections;
 
 public class Calculator : MonoBehaviour {
 
+	public bool isCalculated = false;
+	public bool nullFirst, nullSecond;
 	public GUIStyle calcButton, calcLabel, calcBackground;
-	private string displayText = "0", operSymbol = "";
+	public string displayText = "0", operSymbol = "";
 	private float varA = 0f, varB = 0f;
-	private float? firstValue = null, secondValue = null, tempValue = null;
-	private Rect button1, button2, button3, button4,calcWrapper;
-	private int calcWidth, calcHeight, buttonWidth, buttonHeight, buttonSpacing;
+	private float? firstValue = null, secondValue = null;
+	private Rect button1, button2, button3, button4, calcWrapper;
+	public int calcWidth, calcHeight, buttonWidth, buttonHeight, buttonSpacingX, buttonSpacingY;
 
 	// Use this for initialization
 	void Start () {
 		//Initializing the variables
 		buttonWidth = 32;
-		buttonHeight = 24;
-		buttonSpacing = 0;
-		calcWidth = buttonWidth*4;
-		calcHeight = 222;
+		buttonHeight = 48;
+		buttonSpacingX = 0;
+		buttonSpacingY = 0;
+		calcWidth = ((buttonWidth+buttonSpacingX)*4);
+		calcHeight = ((buttonHeight+buttonSpacingY)*7+19);
+
 		button1 = new Rect(0,
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 		
-		button2 = new Rect(buttonWidth+buttonSpacing,
+		button2 = new Rect(buttonWidth+buttonSpacingX,
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 		
-		button3 = new Rect((buttonWidth*2)+buttonSpacing,
+		button3 = new Rect((buttonWidth*2)+buttonSpacingX,
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 		
-		button4 = new Rect((buttonWidth*3)+buttonSpacing,
+		button4 = new Rect((buttonWidth*3)+buttonSpacingX,
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 
-		calcWrapper = new Rect(330,
-								100,
+		calcWrapper = new Rect(0,
+								0,
 								calcWidth,
 								calcHeight
 								);
@@ -51,7 +55,14 @@ public class Calculator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-			
+		if(firstValue == null)
+			nullFirst=true;
+		else
+			nullFirst=false;
+		if(secondValue == null)
+			nullSecond=true;
+		else
+			nullSecond=false;
 	}
 
 	void OnGUI () {
@@ -64,7 +75,7 @@ public class Calculator : MonoBehaviour {
 			GUI.Label(new Rect(0,0,calcWidth,19), displayText, calcLabel);
 
 			
-			GUI.BeginGroup(new Rect(0,36,calcWidth,buttonHeight), "");
+			GUI.BeginGroup(new Rect(0,(buttonHeight+19),calcWidth,buttonHeight+buttonSpacingY), "");
 				
 				//A variable.  Puts A into whatever value isn't null
 				if (GUI.Button(button1, "A", calcButton)){
@@ -102,7 +113,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,68,calcWidth,buttonHeight), "");
+			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*2)+19,calcWidth,buttonHeight+buttonSpacingY), "");
 				
 				//Stores A value.  If all values are null, throws an error.  Need to work on this.
 				if (GUI.Button(button1, "Str A", calcButton)){
@@ -111,9 +122,6 @@ public class Calculator : MonoBehaviour {
 							varA = (float)secondValue;
 						else
 							varA = (float)firstValue;
-					}
-					else if(tempValue != null){
-						varA = (float)tempValue;
 					}
 					else{
 						displayText = "ERROR";
@@ -127,9 +135,6 @@ public class Calculator : MonoBehaviour {
 							varB = (float)secondValue;
 						else
 							varB = (float)firstValue;
-					}
-					else if(tempValue != null){
-						varB = (float)tempValue;
 					}
 					else{
 						displayText = "ERROR";
@@ -147,7 +152,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,100,calcWidth,buttonHeight), "");
+			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*3)+19,calcWidth,buttonHeight+buttonSpacingY), "");
 				
 				//7
 				if (GUI.Button(button1, "7", calcButton)){
@@ -171,7 +176,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,133,calcWidth,buttonHeight), "");
+			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*4)+19,calcWidth,buttonHeight+buttonSpacingY), "");
 				
 				//4
 				if (GUI.Button(button1, "4", calcButton)){
@@ -195,7 +200,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,166,calcWidth,buttonHeight), "");
+			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*5)+19,calcWidth,buttonHeight+buttonSpacingY), "");
 			
 				//1
 				if (GUI.Button(button1, "1", calcButton)){
@@ -216,7 +221,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,199,calcWidth,buttonHeight), "");
+			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*6)+19,calcWidth,buttonHeight+buttonSpacingY), "");
 			
 				//0
 				if (GUI.Button(new Rect(0,0,buttonWidth*2,buttonHeight), "0", calcButton)){
@@ -228,7 +233,6 @@ public class Calculator : MonoBehaviour {
 				
 					Calculate((float)secondValue, operSymbol);
 					if(!operSymbol.Equals("")){
-						firstValue = null;
 						secondValue = null;
 						operSymbol = "";
 					}
@@ -237,7 +241,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 			
 			//Addition function.  Doesn't have a group because of its awkward size.
-			if (GUI.Button(new Rect(buttonWidth*3,166,buttonWidth,60), "+", calcButton)){
+			if (GUI.Button(new Rect(buttonWidth*3,((buttonHeight+buttonSpacingY)*5)+19,buttonWidth,60), "+", calcButton)){
 				operSymbol = "+";
 			}
 		//End of the calculator wrapper.
@@ -247,19 +251,21 @@ public class Calculator : MonoBehaviour {
 	//Function for two number functions.
 	void Calculate(float number, string operSym) {
 		bool error = false;
+		float value = (float)firstValue;
+
 		switch (operSym){
 			case "+":
-				firstValue += number;
+				value += number;
 				break;
 			case "-":
-				firstValue -= number;
+				value -= number;
 				break;
 			case "*":
-				firstValue *= number;
+				value *= number;
 				break;
 			case "/":
 				if(number != 0)
-					firstValue /= number;
+					value /= number;
 				else
 					error = true;
 				break;
@@ -275,24 +281,29 @@ public class Calculator : MonoBehaviour {
 			displayText = "ERROR";
 			error = false;
 		}
-		else
-			displayText = firstValue + "";
-			tempValue = firstValue;						//so that the store variable button works and I don't have to change how the input function works
+		else{
+			displayText = value + "";
+			firstValue = value;
+			isCalculated = true;
+		}
 	}
 
 	//Function for single number functions and the clear function.
 	void Calculate(string operSym) {
 		bool error = false;
+		float? value = firstValue;
+
 		switch (operSym){
 			case "square":
-				firstValue = Mathf.Pow((float)firstValue,2f);
+				value = Mathf.Pow((float)value,2f);
 				break;
 			case "squareRoot":
-				firstValue = Mathf.Pow((float)firstValue,0.5f);
+				value = Mathf.Pow((float)value,0.5f);
 				break;
 			case "clr":
 				firstValue = null;
 				secondValue = null;
+				value = null; 						
 				break;
 			case "":
 				break;
@@ -306,14 +317,23 @@ public class Calculator : MonoBehaviour {
 			displayText = "ERROR";
 			error = false;
 		}
-		else
-			displayText = firstValue + "";
-			tempValue = firstValue;						//so that the store variable button works and I don't have to change how the input function works
+		else{
+			displayText = value + "";
+			firstValue = value;
+			operSymbol = "";
+			if(!operSym.Equals("clr"))
+				isCalculated = true;
+			else
+				isCalculated = false;
+		}
 	}
 
 	//Value input function.  Checks to see which value we are working with and then if it already has a value
 	//If it has a value, we append the entered number onto the end of the number.
 	void InputValue(int val){
+		if(isCalculated && operSymbol.Equals("")){
+			firstValue = null;
+		}
 		if(firstValue != null){
 			if(!operSymbol.Equals("")){					//If the operSymbol is not empty, then we have started inputing a second value
 				if(secondValue != null){
@@ -334,5 +354,6 @@ public class Calculator : MonoBehaviour {
 			firstValue = (float)val;
 			displayText = firstValue + "";
 		}
+		isCalculated = false;		
 	}
 }
