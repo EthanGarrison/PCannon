@@ -11,8 +11,14 @@ public class GameMaster : MonoBehaviour {
 
 	private double LegA, LegB, LegC;
 	public int Level = 1;
+	private int Points = 0;
 	public GameObject Calculator;
 	private bool toggleCalcActive = false;
+	public GUIStyle Style;
+	
+	
+	//This will be the default width/height
+	public int NativeWidth, NativeHeight;
 	
 	// Use this for initialization
 	void Start () {
@@ -28,13 +34,31 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	//Prototype GUI
-	void OnGUI(){
+	private void OnGUI(){
+		//Allows dynamic GUI Scaling.
+		AutoResize(NativeWidth, NativeHeight);	
+
 		//Once Calculator GameObject is created, attach it to the GM.
 		//Toggles the ActiveState of the Calculator GameObject
 		if(GUILayout.Button ("Calculator")){
 			Calculator.SetActive(!toggleCalcActive);
 			toggleCalcActive = !toggleCalcActive;
 		}
+		
+			}
+
+	//Resizes Screen
+	public static void AutoResize(int screenWidth, int screenHeight){
+		Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
+	}
+
+	//This is just for debug purpose to get the size of rectangles under AutoResize
+	public static Rect GetResizedRect(Rect rect){
+		Vector2 position = GUI.matrix.MultiplyVector(new Vector2(rect.x, rect.y));
+		Vector2 size = GUI.matrix.MultiplyVector(new Vector2(rect.width, rect.height));
+
+		return new Rect(position.x, position.y, size.x, size.y);
 	}
 
 	//Determines which Legs to use
