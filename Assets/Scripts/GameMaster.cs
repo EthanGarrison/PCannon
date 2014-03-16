@@ -11,8 +11,9 @@ public class GameMaster : MonoBehaviour {
 
 	private double LegA, LegB, LegC;
 	public int Level = 1;
-
-
+	public GameObject Calculator;
+	private bool toggleCalcActive = false;
+	
 	// Use this for initialization
 	void Start () {
 		LegGenerator();		
@@ -24,6 +25,16 @@ public class GameMaster : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	//Prototype GUI
+	void OnGUI(){
+		//Once Calculator GameObject is created, attach it to the GM.
+		//Toggles the ActiveState of the Calculator GameObject
+		if(GUILayout.Button ("Calculator")){
+			Calculator.SetActive(!toggleCalcActive);
+			toggleCalcActive = !toggleCalcActive;
+		}
 	}
 
 	//Determines which Legs to use
