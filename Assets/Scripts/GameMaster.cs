@@ -44,8 +44,15 @@ public class GameMaster : MonoBehaviour {
 			Calculator.SetActive(!toggleCalcActive);
 			toggleCalcActive = !toggleCalcActive;
 		}
-		
-			}
+
+		//For Debug Purpose.  Increments points until fire function can be implemented
+		if(GUILayout.Button ("Points")){
+			IncreasePoints(20);
+		}
+
+		//Points DisplayBox
+		GUI.Label(new Rect(NativeWidth-100,NativeHeight-30, 100, 30),Points.ToString(),Style);
+	}
 
 	//Resizes Screen
 	public static void AutoResize(int screenWidth, int screenHeight){
@@ -61,6 +68,11 @@ public class GameMaster : MonoBehaviour {
 		return new Rect(position.x, position.y, size.x, size.y);
 	}
 
+	//This function is publically accessable and increases the points by whatever was given.
+	public void IncreasePoints(int Points){
+		this.Points += Points;
+	}
+	
 	//Determines which Legs to use
 	private void LegGenerator(){
 		if(Level <=10){
