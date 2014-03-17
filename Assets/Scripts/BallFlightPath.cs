@@ -8,17 +8,31 @@ public class BallFlightPath : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
-
-		//AnimatorStateInfo shortFire = Animat
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)){	
-			anim.SetTrigger("Short");
+			PlayShort();
 		}
-
+		if(Input.GetKeyDown(KeyCode.L)){	
+			PlayLong();
+		}
+		if(Input.GetKeyDown(KeyCode.E)){	
+			PlayExact();
+		}
 	}
+
+	void PlayShort(){		
+		anim.SetTrigger("Short");
+	}
+	void PlayLong(){		
+		anim.SetTrigger("Long");
+	}
+	void PlayExact(){		
+		anim.SetTrigger("Exact");
+	}
+
 
 
 }
