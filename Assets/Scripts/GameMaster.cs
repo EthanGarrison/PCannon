@@ -2,6 +2,13 @@
 using System.Collections;
 using System;
 
+		//first create a input box.
+		//User is only presented with a number and punctuation keyboard
+		//take in input 
+		//validate input
+		//assign the input to Ans
+		//clear input box
+
 public class GameMaster : MonoBehaviour {
 
 	int[,] BelowLvl10LegsAB = new int[10, 2] { 
@@ -15,7 +22,8 @@ public class GameMaster : MonoBehaviour {
 	public GameObject Calculator;
 	private bool toggleCalcActive = false;
 	public GUIStyle Style;
-	
+	public String UserAnswer= "";
+	private TouchScreenKeyboard keyboard;
 	
 	//This will be the default width/height
 	public int NativeWidth, NativeHeight;
@@ -33,7 +41,7 @@ public class GameMaster : MonoBehaviour {
 
 	}
 
-	//Prototype GUI
+	//GUI for all display
 	private void OnGUI(){
 		//Allows dynamic GUI Scaling.
 		AutoResize(NativeWidth, NativeHeight);	
@@ -45,16 +53,39 @@ public class GameMaster : MonoBehaviour {
 			toggleCalcActive = !toggleCalcActive;
 		}
 
-		//For Debug Purpose.  Increments points until fire function can be implemented
-		if(GUILayout.Button ("Points")){
+		//------For Debug Purpose. Clears the Input box 
+//		if(GUILayout.Button ("Clear Input")){
+//			ClearInput();
+//		}
+
+		//------For Debug Purpose.  Increments points until fire function can be implemented
+		if(GUILayout.Button ("Fire")){
 			IncreasePoints(20);
+			ClearInput();
 		}
+
+		//Displays the UserAnswer Text Box
+		UserAnswer = GUI.TextField(new Rect(0,NativeHeight-30,100,30), UserAnswer);
+
+		//------For Debug Purpose. Sees if the UserAnswer is valid				
+		ValidateUserInput(UserAnswer);
+		
+		//YYYYYY ProtoType: suppose to only bring up keyboard and punctuation only
+		//Need to check if this actually works on Android
+		keyboard = TouchScreenKeyboard.Open(UserAnswer, 
+			TouchScreenKeyboardType.NumbersAndPunctuation, //Define Keyboard Type
+			false, //autorcorrection
+			false, //multiline
+			false, //secure ***
+			false  //alert
+			);
 
 		//Points DisplayBox
 		GUI.Label(new Rect(NativeWidth-100,NativeHeight-30, 100, 30),Points.ToString(),Style);
 	}
 
-	//Resizes Screen
+	/***RESIZEING*****************/
+	//Resizes Screen to a specified Dimention
 	public static void AutoResize(int screenWidth, int screenHeight){
 		Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
 		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
@@ -67,11 +98,26 @@ public class GameMaster : MonoBehaviour {
 
 		return new Rect(position.x, position.y, size.x, size.y);
 	}
+	/**********************************/
 
+	/***POINTS INCREMENT*******/
 	//This function is publically accessable and increases the points by whatever was given.
 	public void IncreasePoints(int Points){
 		this.Points += Points;
 	}
+	/**********************************/
+	
+	/***INPUT ***********************/
+	//This function is publically accessable and valididates the take in input
+	private bool ValidateUserInput(String input){
+		double number;
+		return Double.TryParse(input, out number) ? true : false;
+	}
+
+	private void ClearInput(){
+		UserAnswer = "";
+	}
+	/**********************************/
 	
 	//Determines which Legs to use
 	private void LegGenerator(){
