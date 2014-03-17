@@ -12,24 +12,16 @@ public class BallFlightPath : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){	
-			PlayShort();
-		}
-		if(Input.GetKeyDown(KeyCode.L)){	
-			PlayLong();
-		}
-		if(Input.GetKeyDown(KeyCode.E)){	
-			PlayExact();
-		}
+
 	}
 
-	void PlayShort(){		
+	public void PlayShort(){		
 		anim.SetTrigger("Short");
 	}
-	void PlayLong(){		
+	public void PlayLong(){		
 		anim.SetTrigger("Long");
 	}
-	void PlayExact(){		
+	public void PlayExact(){		
 		anim.SetTrigger("Exact");
 	}
 

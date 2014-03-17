@@ -30,6 +30,7 @@ public class CannonTouchScript : MonoBehaviour {
 					AnimateCannon();	
 					GM.GetComponent<GameMaster>().ExecuteHitResult();		
 			}
+			GM.GetComponent<GameMaster>().ClearInput();
 		}
 	}
 

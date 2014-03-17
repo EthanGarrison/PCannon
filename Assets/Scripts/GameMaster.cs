@@ -13,11 +13,14 @@ public class GameMaster : MonoBehaviour {
 	public int Level = 1;
 	public int FuseLife = 10;
 	private int Points = 0;
+
 	public GameObject Calculator;
 	private bool toggleCalcActive = false;
+	
+	public GameObject CannonBall;
+	
 	public GUIStyle Style;
 	public String UserAnswer= "";
-	private TouchScreenKeyboard keyboard;
 	
 	//This will be the default width/height
 	public int NativeWidth, NativeHeight;
@@ -61,14 +64,14 @@ public class GameMaster : MonoBehaviour {
 		double UserAnswerDouble = Double.Parse(UserAnswer);
 		//TODO: Round the Double	
 		if(UserAnswerDouble < LegC){
-			Debug.Log("Short");
+			CannonBall.GetComponent<BallFlightPath>().PlayShort();
 			FuseLife--;
 		}else if(UserAnswerDouble > LegC){
+			CannonBall.GetComponent<BallFlightPath>().PlayLong();
 			Points+=5;
 			FuseLife-=2;
-			Debug.Log("Long");
 		}else{
-			Debug.Log("Exact");
+			CannonBall.GetComponent<BallFlightPath>().PlayExact();
 			Points+=10;
 			//Need go to next level
 		}	
@@ -99,7 +102,7 @@ public class GameMaster : MonoBehaviour {
 		return new Rect(position.x, position.y, size.x, size.y);
 	}
 	
-	private void ClearInput(){
+	public void ClearInput(){
 		UserAnswer = "";
 	}
 	
