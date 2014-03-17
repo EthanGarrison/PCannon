@@ -2,13 +2,6 @@
 using System.Collections;
 using System;
 
-		//first create a input box.
-		//User is only presented with a number and punctuation keyboard
-		//take in input 
-		//validate input
-		//assign the input to Ans
-		//clear input box
-
 public class GameMaster : MonoBehaviour {
 
 	int[,] BelowLvl10LegsAB = new int[10, 2] { 
@@ -31,9 +24,6 @@ public class GameMaster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		LegGenerator();		
-		
-		//For debug purpose
-		//Debug.Log(LegC);
 	}
 	
 	// Update is called once per frame
@@ -53,35 +43,17 @@ public class GameMaster : MonoBehaviour {
 			toggleCalcActive = !toggleCalcActive;
 		}
 
-		//------For Debug Purpose. Clears the Input box 
-//		if(GUILayout.Button ("Clear Input")){
-//			ClearInput();
-//		}
-
-		//------For Debug Purpose.  Increments points until fire function can be implemented
-		if(GUILayout.Button ("Fire")){
-			IncreasePoints(20);
-			ClearInput();
-		}
-
 		//Displays the UserAnswer Text Box
 		UserAnswer = GUI.TextField(new Rect(0,NativeHeight-30,100,30), UserAnswer);
 
-		//------For Debug Purpose. Sees if the UserAnswer is valid				
-		ValidateUserInput(UserAnswer);
-		
-		//YYYYYY ProtoType: suppose to only bring up keyboard and punctuation only
-		//Need to check if this actually works on Android
-		keyboard = TouchScreenKeyboard.Open(UserAnswer, 
-			TouchScreenKeyboardType.NumbersAndPunctuation, //Define Keyboard Type
-			false, //autorcorrection
-			false, //multiline
-			false, //secure ***
-			false  //alert
-			);
-
 		//Points DisplayBox
 		GUI.Label(new Rect(NativeWidth-100,NativeHeight-30, 100, 30),Points.ToString(),Style);
+	}
+
+
+	//Executes the animation of the castle being hit range
+	public void ExecuteHitResult(){
+		
 	}
 
 	/***RESIZEING*****************/
@@ -98,16 +70,12 @@ public class GameMaster : MonoBehaviour {
 
 		return new Rect(position.x, position.y, size.x, size.y);
 	}
-	/**********************************/
 
-	/***POINTS INCREMENT*******/
 	//This function is publically accessable and increases the points by whatever was given.
 	public void IncreasePoints(int Points){
 		this.Points += Points;
 	}
-	/**********************************/
 	
-	/***INPUT ***********************/
 	//This function is publically accessable and valididates the take in input
 	private bool ValidateUserInput(String input){
 		double number;
@@ -117,7 +85,7 @@ public class GameMaster : MonoBehaviour {
 	private void ClearInput(){
 		UserAnswer = "";
 	}
-	/**********************************/
+	
 	
 	//Determines which Legs to use
 	private void LegGenerator(){

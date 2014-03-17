@@ -7,6 +7,7 @@ public class CannonTouchScript : MonoBehaviour {
 	RaycastHit2D cannonTouchTest;
 	bool isFired;
 	string attachedName;
+	public GameObject GM;
 
 
 	// Use this for initialization
@@ -22,14 +23,14 @@ public class CannonTouchScript : MonoBehaviour {
 		if(Input.touchCount == 1){
 			touchInput = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 			cannonTouchTest = Physics2D.GetRayIntersection(touchInput, Mathf.Infinity);
-		}
 
-		//If the hit object is the GameObject that this script is attached to and
-		//the cannon hasn't been fired, then call AnimateCannon() and FireBall()
-		if(cannonTouchTest.collider.name == attachedName && !isFired){
-			AnimateCannon();
-			FireBall();
-			isFired = true;
+			//If the hit object is the GameObject that this script is attached to and
+			//the cannon hasn't been fired, then call AnimateCannon() and FireBall()
+			if(cannonTouchTest.collider.name == attachedName && !isFired){
+				AnimateCannon();
+				FireBall();
+				isFired = true;
+			}
 		}
 
 		//Displays the results of the hit after the cannon fired
@@ -51,6 +52,6 @@ public class CannonTouchScript : MonoBehaviour {
 
 	//Stand in function for the ExecuteHitResults() of the GM
 	void ExecuteHitResults(){
-		print("This is the FireBall() function");
+		GM.GetComponent<GameMaster>().ExecuteHitResult();
 	}
 }
