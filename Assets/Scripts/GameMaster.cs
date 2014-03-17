@@ -11,6 +11,7 @@ public class GameMaster : MonoBehaviour {
 
 	private double LegA, LegB, LegC;
 	public int Level = 1;
+	public int FuseLife = 10;
 	private int Points = 0;
 	public GameObject Calculator;
 	private bool toggleCalcActive = false;
@@ -42,6 +43,10 @@ public class GameMaster : MonoBehaviour {
 			Calculator.SetActive(!toggleCalcActive);
 			toggleCalcActive = !toggleCalcActive;
 		}
+		if(GUILayout.Button ("Fire!")){
+			ExecuteHitResult();
+		}
+
 
 		//Displays the UserAnswer Text Box
 		UserAnswer = GUI.TextField(new Rect(0,NativeHeight-30,100,30), UserAnswer);
@@ -53,7 +58,30 @@ public class GameMaster : MonoBehaviour {
 
 	//Executes the animation of the castle being hit range
 	public void ExecuteHitResult(){
-		
+		double UserAnswerDouble = Double.Parse(UserAnswer);
+		//TODO: Round the Double	
+		if(UserAnswerDouble < LegC){
+			Debug.Log("Short");
+			FuseLife--;
+		}else if(UserAnswerDouble > LegC){
+			Points+=5;
+			FuseLife-=2;
+			Debug.Log("Long");
+		}else{
+			Debug.Log("Exact");
+			Points+=10;
+			//Need go to next level
+		}	
+		ClearInput();
+	}
+
+	//Checks if this is a valid input
+	public bool HasValidInput(){
+		double number;
+		if(UserAnswer != "" && Double.TryParse(UserAnswer, out number)){
+			return true;
+		}
+		return false;
 	}
 
 	/***RESIZEING*****************/
@@ -70,24 +98,13 @@ public class GameMaster : MonoBehaviour {
 
 		return new Rect(position.x, position.y, size.x, size.y);
 	}
-
-	//This function is publically accessable and increases the points by whatever was given.
-	public void IncreasePoints(int Points){
-		this.Points += Points;
-	}
 	
-	//This function is publically accessable and valididates the take in input
-	private bool ValidateUserInput(String input){
-		double number;
-		return Double.TryParse(input, out number) ? true : false;
-	}
-
 	private void ClearInput(){
 		UserAnswer = "";
 	}
 	
-	
 	//Determines which Legs to use
+	//TODO Round LegC
 	private void LegGenerator(){
 		if(Level <=10){
 			//use the array
