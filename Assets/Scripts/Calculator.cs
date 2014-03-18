@@ -3,70 +3,75 @@ using System.Collections;
 
 public class Calculator : MonoBehaviour {
 
-	public bool isCalculated = false;
-	public bool nullFirst, nullSecond;
+	// public bool nullFirst, nullSecond;
+	private bool isCalculated = false;
 	public GUIStyle calcButton, calcLabel, calcBackground;
-	public string displayText = "0", operSymbol = "";
+	private string displayText = "0", operSymbol = "";
 	private float varA = 0f, varB = 0f;
 	private float? firstValue = null, secondValue = null;
-	private Rect button1, button2, button3, button4, calcWrapper;
-	public int calcWidth, calcHeight, buttonWidth, buttonHeight, buttonSpacingX, buttonSpacingY;
+	private Rect button1, button2, button3, button4,calcWrapper;
+	public int calcWidth, calcHeight, buttonWidth, buttonHeight;
+	public GameMaster GM;
+	public int x=0, y=0;
 
-	// Use this for initialization
 	void Start () {
 		//Initializing the variables
-		buttonWidth = 32;
-		buttonHeight = 48;
-		buttonSpacingX = 0;
-		buttonSpacingY = 0;
-		calcWidth = ((buttonWidth+buttonSpacingX)*4);
-		calcHeight = ((buttonHeight+buttonSpacingY)*7+19);
+		
 
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		// if(firstValue == null)
+		// 	nullFirst = true;
+		// else
+		// 	nullFirst = false;
+		// if(secondValue == null)
+		// 	nullSecond = true;
+		// else
+		// 	nullSecond = false;
+		calcWrapper = new Rect(GM.NativeWidth-200,
+								GM.NativeHeight-190,
+								calcWidth,
+								calcHeight
+								);
+		buttonWidth = x;
+		buttonHeight = y;
+		calcWidth = (buttonWidth)*4;
+		calcHeight = (buttonHeight*6)+19;
 		button1 = new Rect(0,
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 		
-		button2 = new Rect(buttonWidth+buttonSpacingX,
+		button2 = new Rect(buttonWidth,
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 		
-		button3 = new Rect((buttonWidth*2)+buttonSpacingX,
+		button3 = new Rect((buttonWidth*2),
 							0,
 							buttonWidth,
 							buttonHeight
 							);
 		
-		button4 = new Rect((buttonWidth*3)+buttonSpacingX,
+		button4 = new Rect((buttonWidth*3),
 							0,
 							buttonWidth,
 							buttonHeight
 							);
-
-		calcWrapper = new Rect(0,
-								0,
-								calcWidth,
-								calcHeight
-								);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(firstValue == null)
-			nullFirst=true;
-		else
-			nullFirst=false;
-		if(secondValue == null)
-			nullSecond=true;
-		else
-			nullSecond=false;
+			
 	}
 
 	void OnGUI () {
-		GUI.contentColor = Color.black;
+		Debug.Log(GM.NativeWidth);
+		Debug.Log(GM.NativeHeight);
+		GM.AutoResize(GM.NativeWidth, GM.NativeHeight);
+
+		GUI.Label(new Rect(0,0,100,10), "This is a test");
 		
 		//The wrapper for the entire calculator
 		GUI.BeginGroup(calcWrapper, "", calcBackground);
@@ -75,30 +80,16 @@ public class Calculator : MonoBehaviour {
 			GUI.Label(new Rect(0,0,calcWidth,19), displayText, calcLabel);
 
 			
-			GUI.BeginGroup(new Rect(0,(buttonHeight+19),calcWidth,buttonHeight+buttonSpacingY), "");
+			GUI.BeginGroup(new Rect(0,buttonHeight,calcWidth,buttonHeight), "");
 				
 				//A variable.  Puts A into whatever value isn't null
 				if (GUI.Button(button1, "A", calcButton)){
-					if(firstValue != null){
-						secondValue = varA;
-						displayText = secondValue + "";
-					}
-					else{
-						firstValue = varA;
-						displayText = firstValue + "";
-					}
+					DisplayStoredValue("A");
 				}
 				
 				//B variable.  Puts B into whatever value isn't null
 				if (GUI.Button(button2, "B", calcButton)){
-					if(firstValue != null){
-						secondValue = varB;
-						displayText = secondValue + "";
-					}
-					else{
-						firstValue = varB;
-						displayText = firstValue + "";
-					}
+					DisplayStoredValue("B");
 				}
 				
 				//Subtraction
@@ -113,32 +104,16 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*2)+19,calcWidth,buttonHeight+buttonSpacingY), "");
+			GUI.BeginGroup(new Rect(0,buttonHeight*2,calcWidth,buttonHeight), "");
 				
 				//Stores A value.  If all values are null, throws an error.  Need to work on this.
 				if (GUI.Button(button1, "Str A", calcButton)){
-					if(firstValue != null){
-						if(secondValue != null)
-							varA = (float)secondValue;
-						else
-							varA = (float)firstValue;
-					}
-					else{
-						displayText = "ERROR";
-					}
+					StoreValue("A");
 				}
 				
 				//Stores B value.  If all values are null, throws an error.  Need to work on this.
 				if (GUI.Button(button2, "Str B", calcButton)){
-					if(firstValue != null){
-						if(secondValue != null)
-							varB = (float)secondValue;
-						else
-							varB = (float)firstValue;
-					}
-					else{
-						displayText = "ERROR";
-					}
+					StoreValue("B");
 				}
 
 				//Multiplication
@@ -152,7 +127,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*3)+19,calcWidth,buttonHeight+buttonSpacingY), "");
+			GUI.BeginGroup(new Rect(0,buttonHeight*3,calcWidth,buttonHeight), "");
 				
 				//7
 				if (GUI.Button(button1, "7", calcButton)){
@@ -176,7 +151,7 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*4)+19,calcWidth,buttonHeight+buttonSpacingY), "");
+			GUI.BeginGroup(new Rect(0,buttonHeight*4,calcWidth,buttonHeight), "");
 				
 				//4
 				if (GUI.Button(button1, "4", calcButton)){
@@ -200,12 +175,11 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*5)+19,calcWidth,buttonHeight+buttonSpacingY), "");
+			GUI.BeginGroup(new Rect(0,buttonHeight*5,calcWidth,buttonHeight), "");
 			
 				//1
 				if (GUI.Button(button1, "1", calcButton)){
 					InputValue(1);
-			
 				}
 			
 				//2
@@ -221,15 +195,15 @@ public class Calculator : MonoBehaviour {
 			GUI.EndGroup();
 
 			
-			GUI.BeginGroup(new Rect(0,((buttonHeight+buttonSpacingY)*6)+19,calcWidth,buttonHeight+buttonSpacingY), "");
+			GUI.BeginGroup(new Rect(0,buttonHeight*6,calcWidth,buttonHeight), "");
 			
 				//0
-				if (GUI.Button(new Rect(0,0,buttonWidth*2,buttonHeight), "0", calcButton)){
+				if (GUI.Button(button1, "0", calcButton)){
 					InputValue(0);
 				}
 			
 				//Equals function.  Sets the values to null.
-				if (GUI.Button(button3, "=", calcButton)){
+				if (GUI.Button(button2, "=", calcButton)){
 				
 					Calculate((float)secondValue, operSymbol);
 					if(!operSymbol.Equals("")){
@@ -237,13 +211,13 @@ public class Calculator : MonoBehaviour {
 						operSymbol = "";
 					}
 				}
+
+				if (GUI.Button(button3, "+", calcButton)){
+					operSymbol = "+";
+				}
 					
 			GUI.EndGroup();
-			
-			//Addition function.  Doesn't have a group because of its awkward size.
-			if (GUI.Button(new Rect(buttonWidth*3,((buttonHeight+buttonSpacingY)*5)+19,buttonWidth,60), "+", calcButton)){
-				operSymbol = "+";
-			}
+
 		//End of the calculator wrapper.
 		GUI.EndGroup();
 	}
@@ -355,5 +329,42 @@ public class Calculator : MonoBehaviour {
 			displayText = firstValue + "";
 		}
 		isCalculated = false;		
+	}
+
+	void DisplayStoredValue(string keyPressed){
+		
+		float variable;
+
+		if(keyPressed == "A")
+			variable = varA;
+		else
+			variable = varB;
+		
+		if(firstValue != null && operSymbol != ""){
+			secondValue = variable;
+			displayText = secondValue + "";
+		}
+		else{
+			firstValue = variable;
+			displayText = firstValue + "";
+		}
+	}
+
+	void StoreValue(string keyPressed){
+
+		float variable = 0f;
+
+		if(firstValue != null){
+			if(secondValue != null)
+				variable = (float)secondValue;
+			else
+				variable = (float)firstValue;
+		}
+		else
+			displayText = "ERROR";
+		if(keyPressed == "A")
+			varA = variable;
+		else
+			varB = variable;
 	}
 }
