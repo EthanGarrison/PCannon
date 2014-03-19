@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 5d3ccf220521c704a969b0d2c8e8c1d0
+guid: e13fbc34c69e6f0428fa86a0f948b37e
 TextureImporter:
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    linearTexture: 1
+    linearTexture: 0
     correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
@@ -24,53 +24,26 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
-  textureType: 2
+  textureType: 8
   buildTargetSettings:
   - buildTarget: iPhone
     maxTextureSize: 1024
     textureFormat: -2
     compressionQuality: 50
   spriteSheet:
-    sprites:
-    - name: calculatorbutton_0
-      rect:
-        serializedVersion: 2
-        x: 1064
-        y: 270
-        width: 500
-        height: 100
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: calculatorbutton_1
-      rect:
-        serializedVersion: 2
-        x: 619
-        y: 65
-        width: 368
-        height: 250
-      alignment: 0
-      pivot: {x: .5, y: .5}
-    - name: calculatorbutton_2
-      rect:
-        serializedVersion: 2
-        x: 1101
-        y: 102
-        width: 500
-        height: 100
-      alignment: 0
-      pivot: {x: .5, y: .5}
+    sprites: []
   spritePackingTag: 
   userData: 
