@@ -4,10 +4,10 @@ using System.Collections;
 public class Calculator : MonoBehaviour {
 
 	//These are necessary for the calculator funtionality
-	public bool nullFirst, nullSecond;
+	public bool nullFirst, nullSecond, isDecimal = false;
 	public bool isCalculated = false;
 	public string displayText = "0", operSymbol = "";
-	public float varA = 0f, varB = 0f;
+	public float varA = 0f, varB = 0f, counterDecimal = 0f;
 	private float? firstValue = null, secondValue = null;
 	public GameMaster GM;
 
@@ -141,13 +141,16 @@ public class Calculator : MonoBehaviour {
 					InputValue(0);
 
 				if(GUI.Button(button3, ".", calcButton))
-					Debug.Log("Fix this");
+					isDecimal = true;
 
 				if(GUI.Button(button4, "=", calcButton))
 					Calculate((float)secondValue, operSymbol);
 
-				if(GUI.Button(button5, "+", calcButton))
+				if(GUI.Button(button5, "+", calcButton)){
 					operSymbol = "+";
+					counterDecimal = 0;
+					isDecimal = false;
+				}
 
 			GUI.EndGroup();
 
@@ -215,7 +218,9 @@ public class Calculator : MonoBehaviour {
 			case "clr":
 				firstValue = null;
 				secondValue = null;
-				value = null; 						
+				value = null;
+				isDecimal = false;
+				counterDecimal = 0;					
 				break;
 			case "":
 				break;
@@ -246,9 +251,9 @@ public class Calculator : MonoBehaviour {
 		if(isCalculated && operSymbol.Equals("")){
 			firstValue = null;
 		}
-		
+		if(!isDecimal){	
 			if(firstValue != null){
-				if(!operSymbol.Equals("")){					//If the operSymbol is not empty, then we have started inputing a second value
+				if(!operSymbol.Equals("")){				//If the operSymbol is not empty, then we have started inputing a second value
 					if(secondValue != null){
 						secondValue = (secondValue*10)+val;
 						displayText = secondValue + "";
@@ -267,7 +272,30 @@ public class Calculator : MonoBehaviour {
 				firstValue = (float)val;
 				displayText = firstValue + "";
 			}
-		
+		}
+		else{
+			counterDecimal++;
+			if(firstValue != null){
+				if(!operSymbol.Equals("")){					//If the operSymbol is not empty, then we have started inputing a second value
+					if(secondValue != null){
+						secondValue = secondValue+(val/(Mathf.Pow(10f, counterDecimal)));
+						displayText = secondValue + "";
+					}
+					else{
+						secondValue = (float)val/10f;
+						displayText = secondValue + "";
+					}
+				}
+				else{
+					firstValue = firstValue+(val/(Mathf.Pow(10f, counterDecimal)));
+					displayText = firstValue + "";
+				}
+			}
+			else{
+				firstValue = (float)val/10f;
+				displayText = firstValue + "";
+			}	
+		}
 		isCalculated = false;		
 	}
 
