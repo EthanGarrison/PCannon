@@ -7,10 +7,12 @@ public class CannonTouchScript : MonoBehaviour {
 	private RaycastHit2D cannonTouchTest;
 	private string attachedName;
 	public GameMaster GM;
+	Animator anim;
 	// Use this for initialization
 	void Start () {
 		//This is the name of the GameObject that this script is attached to.
 		attachedName = gameObject.name;
+		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -32,6 +34,6 @@ public class CannonTouchScript : MonoBehaviour {
 
 	//Calls the animation script for the cannon
 	void AnimateCannon(){
-		print("This is the AnimateCannon() function");
+		anim.SetTrigger("cannonFireTrigger");
 	}
 }
