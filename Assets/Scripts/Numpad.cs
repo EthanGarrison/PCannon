@@ -6,7 +6,7 @@ public class Numpad : MonoBehaviour {
 	private Rect numpadBg, group1, group2, group3, group4;
 	private Rect button1, button2, button3, helpButton;
 	public GameObject Calculator;
-	public string displayText = "";
+	private string displayText = "";
 	private float? inputValue = null;
 	private float counterDecimal = 0f;
 	private bool isDecimal = false;
@@ -148,5 +148,9 @@ public class Numpad : MonoBehaviour {
 	private void DisplayCalculator(){
 		Calculator.SetActive(true);
 		gameObject.SetActive(false);
+	}
+
+	public string GetDisplayText(){
+		return displayText;
 	}
 }

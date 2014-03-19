@@ -24,7 +24,7 @@ public class GameMaster : MonoBehaviour {
 	private int Points = 0;
 	public GUIStyle PointStyle;
 	public GUIStyle GUITheme;
-	public String UserAnswer= "";
+	public string UserAnswer= "";
 
 	public int NativeWidth, NativeHeight;
 
@@ -33,7 +33,7 @@ public class GameMaster : MonoBehaviour {
 	}
 	void Update(){
 		if(NumPad.activeSelf){
-			UserAnswer = NumPad.GetComponent<Numpad>().displayText;
+			UserAnswer = NumPad.GetComponent<Numpad>().GetDisplayText();
 		}
 	}
 
