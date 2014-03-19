@@ -96,8 +96,10 @@ public class Numpad : MonoBehaviour {
 
 			GUI.EndGroup();
 
-			if(GUI.Button(helpButton, "Need Help?"))
+			if(GUI.Button(helpButton, "Need Help?")){
 				DisplayCalculator();
+				GM.needHelpActive = true;
+			}
 
 		//End Main Group
 		GUI.EndGroup();

@@ -4,8 +4,11 @@ using System;
 
 public class GameMaster : MonoBehaviour {
 
-	public GameObject Calculator;
-	private bool toggleCalcActive = false;
+	public GameObject NumPad;
+
+	private bool toggleNumActive = false;
+	public GameObject Calc;
+	public bool needHelpActive = false;
 
 	public BallFlightPath CannonBall;
 
@@ -29,15 +32,18 @@ public class GameMaster : MonoBehaviour {
 		LegGenerator();
 	}
 	void Update(){
+		if(NumPad.activeSelf){
+			UserAnswer = NumPad.GetComponent<Numpad>().displayText;
+		}
 	}
 
 	private void OnGUI(){
 		AutoResize(NativeWidth, NativeHeight);	//Allows dynamic GUI Scaling.
 		GUI.Label(new Rect(NativeWidth-100,NativeHeight-30, 100, 30),Points.ToString(),PointStyle); //Points DisplayBox
 
-		if(!GameStatDisplayUp){		
-			if(GUI.Button (new Rect(0, NativeHeight-15,75,15),"Calculator")){//Toggles the ActiveState of the Calculator GameObject	
-				DisplayCalculator();
+		if(!GameStatDisplayUp){
+			if(GUI.Button (new Rect(0, NativeHeight-15,75,15),UserAnswer)){//Toggles the ActiveState of the Calculator GameObject	
+				DisplayNumPad();
 			}
 			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
 			}else{
@@ -96,18 +102,23 @@ public class GameMaster : MonoBehaviour {
 
 	private void EndLevel(bool GameOver){
 		GameStatDisplayUp = true; 
-		toggleCalcActive = false;
-		Calculator.SetActive(false);
+		toggleNumActive = false;
+		NumPad.SetActive(false);
 		if(!GameOver){ //increments level if false
 			Level++;
 		}
 		LegGenerator();
 	}
 
-	private void DisplayCalculator(){
-		Calculator.SetActive(!toggleCalcActive);
-		toggleCalcActive = !toggleCalcActive;
+	private void DisplayNumPad(){
+		if(needHelpActive){
+			Calc.SetActive(!toggleNumActive);			
+		}else{
+			NumPad.SetActive(!toggleNumActive);
+		}
+		toggleNumActive = !toggleNumActive;
 	}
+
 	
 	//TODO Round LegC
 	private void LegGenerator(){ //Determines which Legs to use
