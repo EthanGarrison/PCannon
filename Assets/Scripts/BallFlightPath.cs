@@ -24,7 +24,4 @@ public class BallFlightPath : MonoBehaviour {
 	public void PlayExact(){		
 		anim.SetTrigger("Exact");
 	}
-
-
-
 }

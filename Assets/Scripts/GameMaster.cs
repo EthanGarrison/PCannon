@@ -4,119 +4,120 @@ using System;
 
 public class GameMaster : MonoBehaviour {
 
+	public GameObject Calculator;
+	private bool toggleCalcActive = false;
+
+	public BallFlightPath CannonBall;
+
 	int[,] BelowLvl10LegsAB = new int[10, 2] { 
 		{ 3, 4 }, { 5, 12 }, { 9, 12 }, { 12, 16 }, { 24, 7 }, 
 		{ 3, 4 }, { 5, 12 }, { 9, 12 }, { 12, 16 }, { 24, 7 }
 	};
-
-	private double LegA, LegB, LegC;
-	public int Level = 1;
-	public int FuseLife = 10;
+	private double LegA, LegB, LegC;	
+	
+	private bool GameStatDisplayUp = false;	
+	private int Level = 1;
+	private int FuseLife = 10;
 	private int Points = 0;
-
-	public GameObject Calculator;
-	private bool toggleCalcActive = false;
-	
-	public GameObject CannonBall;
-	
-	public GUIStyle Style;
+	public GUIStyle PointStyle;
+	public GUIStyle GUITheme;
 	public String UserAnswer= "";
-	
-	//This will be the default width/height
+
 	public int NativeWidth, NativeHeight;
-	
-	// Use this for initialization
+
 	void Start () {
-		LegGenerator();		
+		LegGenerator();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
+	void Update(){
 	}
 
-	//GUI for all display
 	private void OnGUI(){
-		//Allows dynamic GUI Scaling.
-		AutoResize(NativeWidth, NativeHeight);	
+		AutoResize(NativeWidth, NativeHeight);	//Allows dynamic GUI Scaling.
+		GUI.Label(new Rect(NativeWidth-100,NativeHeight-30, 100, 30),Points.ToString(),PointStyle); //Points DisplayBox
 
-		//Once Calculator GameObject is created, attach it to the GM.
-		//Toggles the ActiveState of the Calculator GameObject
-		if(GUILayout.Button ("Calculator")){
-			Calculator.SetActive(!toggleCalcActive);
-			toggleCalcActive = !toggleCalcActive;
+		if(!GameStatDisplayUp){		
+			if(GUI.Button (new Rect(0, NativeHeight-15,75,15),"Calculator")){//Toggles the ActiveState of the Calculator GameObject	
+				DisplayCalculator();
+			}
+			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
+			}else{
+				if(FuseLife<=0){
+					DisplayGameStat("No more life", "Level");
+					//Load new level once multiple scene has been made
+					//Application.LoadLevel (0);
+				}
+				else{
+					DisplayGameStat("Correct!", "Next Level");
+				}
+			}
 		}
-		if(GUILayout.Button ("Fire!")){
-			ExecuteHitResult();
+
+	private void DisplayGameStat(String Title, String LevelTitle){ //GUI OF THE STAT GAME		
+		Rect StatDisplay = new Rect (0, 0, NativeWidth, NativeHeight);
+		GUI.BeginGroup (StatDisplay);
+		// We'll make a box so you can see where the group is on-screen.
+		GUI.Box (new Rect (0,0,StatDisplay.width,StatDisplay.height), Title);
+		GUI.Label(new Rect(10,15,StatDisplay.width,StatDisplay.height),
+			LevelTitle + " : " + Level + "\n" +
+			"Remaining FuseLife: " + FuseLife + "\n" +
+			"Total Points : " + Points + "\n");
+
+		if(GUI.Button (new Rect (StatDisplay.width/2-40,StatDisplay.height-35,80,30), "OK")){
+			GameStatDisplayUp = false;	
 		}
-
-
-		//Displays the UserAnswer Text Box
-		UserAnswer = GUI.TextField(new Rect(0,NativeHeight-30,100,30), UserAnswer);
-
-		//Points DisplayBox
-		GUI.Label(new Rect(NativeWidth-100,NativeHeight-30, 100, 30),Points.ToString(),Style);
-	}
-
-
-	//Executes the animation of the castle being hit range
-	public void ExecuteHitResult(){
-		double UserAnswerDouble = Double.Parse(UserAnswer);
-		//TODO: Round the Double	
-		if(UserAnswerDouble < LegC){
-			CannonBall.GetComponent<BallFlightPath>().PlayShort();
-			FuseLife--;
-		}else if(UserAnswerDouble > LegC){
-			CannonBall.GetComponent<BallFlightPath>().PlayLong();
-			Points+=5;
-			FuseLife-=2;
-		}else{
-			CannonBall.GetComponent<BallFlightPath>().PlayExact();
-			Points+=10;
-			//Need go to next level
-		}	
-		ClearInput();
-	}
-
-	//Checks if this is a valid input
-	public bool HasValidInput(){
-		double number;
-		if(UserAnswer != "" && Double.TryParse(UserAnswer, out number)){
-			return true;
-		}
-		return false;
-	}
-
-	/***RESIZEING*****************/
-	//Resizes Screen to a specified Dimention
-	public static void AutoResize(int screenWidth, int screenHeight){
-		Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
-		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
-	}
-
-	//This is just for debug purpose to get the size of rectangles under AutoResize
-	public static Rect GetResizedRect(Rect rect){
-		Vector2 position = GUI.matrix.MultiplyVector(new Vector2(rect.x, rect.y));
-		Vector2 size = GUI.matrix.MultiplyVector(new Vector2(rect.width, rect.height));
-
-		return new Rect(position.x, position.y, size.x, size.y);
+		GUI.EndGroup ();
 	}
 	
-	public void ClearInput(){
-		UserAnswer = "";
+	public void ExecuteHitResult(){//Executes the animation of the castle being hit range
+		if(!GameStatDisplayUp){
+			double UserAnswerDouble = Double.Parse(UserAnswer);
+			//TODO: Round the Double	
+			if(UserAnswerDouble < LegC){
+				CannonBall.PlayShort();
+				FuseLife--;
+			}
+			else if(UserAnswerDouble > LegC){
+				CannonBall.PlayLong();
+				Points+=5;
+				FuseLife-=2;
+			}
+			else{
+				CannonBall.PlayExact();
+				Points+=10;
+				EndLevel(false);
+			}
+
+			ClearInput();
+			if(FuseLife <= 0){
+				EndLevel(true);		
+			}
+		}
+	}
+
+	private void EndLevel(bool GameOver){
+		GameStatDisplayUp = true; 
+		toggleCalcActive = false;
+		Calculator.SetActive(false);
+		if(!GameOver){ //increments level if false
+			Level++;
+		}
+		LegGenerator();
+	}
+
+	private void DisplayCalculator(){
+		Calculator.SetActive(!toggleCalcActive);
+		toggleCalcActive = !toggleCalcActive;
 	}
 	
-	//Determines which Legs to use
 	//TODO Round LegC
-	private void LegGenerator(){
-		if(Level <=10){
-			//use the array
+	private void LegGenerator(){ //Determines which Legs to use
+		if(Level <=10){ //use the array
+			
 			LegA = BelowLvl10LegsAB[Level-1,0];
 			LegB = BelowLvl10LegsAB[Level-1,1];
 			LegC = CalcLegC(LegA,LegB);
 		}
-		else{
-			//increment ever other leg by 2
+		else{ //increment ever other leg by 2
 			LegA = Math.Round(LegA);
 			LegB = Math.Round(LegB);
 			if(Level%2==0){
@@ -130,9 +131,23 @@ public class GameMaster : MonoBehaviour {
 		}
 	}
 
-	//Calculates Pythagorean theorem
-	private double CalcLegC(double LegA,double LegB){
+	private double CalcLegC(double LegA,double LegB){//Calculates Pythagorean theorem
 		double C = (LegA*LegA)+(LegB*LegB);
 		return Math.Sqrt(C);
 	}
+
+	public void AutoResize(int screenWidth, int screenHeight){ //Resizes Screen to a specified Dimention
+		Vector2 resizeRatio = new Vector2((float)Screen.width / screenWidth, (float)Screen.height / screenHeight);
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(resizeRatio.x, resizeRatio.y, 1.0f));
+	}
+
+	public bool HasValidInput(){ //Checks if this is a valid input
+		double number;
+		return (UserAnswer != "" && Double.TryParse(UserAnswer, out number)? true : false);
+	}
+
+	public void ClearInput(){
+		UserAnswer = "";
+	}
+
 }
