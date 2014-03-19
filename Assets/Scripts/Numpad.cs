@@ -4,26 +4,18 @@ using System.Collections;
 public class Numpad : MonoBehaviour {
 
 	private Rect numpadBg, group1, group2, group3, group4;
-	private Rect button1, button2, button3, helpButton;
-	public GameObject Calculator;
+	private Rect button1, button2, button3, helpButton;	
 	private string displayText = "";
 	private float? inputValue = null;
 	private float counterDecimal = 0f;
 	private bool isDecimal = false;
+	public GameObject Calculator;
 	public GameMaster GM;
 
 	// Use this for initialization
 	void Start () {
-		numpadBg = new Rect(	GM.NativeWidth/4f,
-								0,
-								(GM.NativeWidth*(3f/4f)),
-								GM.NativeHeight
-							);
-		helpButton = new Rect(	numpadBg.width*(10f/13),
-								numpadBg.height*(1f/13),
-								numpadBg.width*(2f/13),
-								numpadBg.height*(11f/13)
-							);
+		numpadBg = new Rect(	GM.NativeWidth/4f,0,(GM.NativeWidth*(3f/4f)),GM.NativeHeight);
+		helpButton = new Rect(	numpadBg.width*(10f/13),numpadBg.height*(1f/13),numpadBg.width*(2f/13),numpadBg.height*(11f/13));
 		group1 = createRRect(1f);
 		group2 = createRRect(4f);
 		group3 = createRRect(7f);
@@ -31,11 +23,6 @@ public class Numpad : MonoBehaviour {
 		button1 = createBRect(1f);
 		button2 = createBRect(4f);
 		button3 = createBRect(7f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	void OnGUI(){
@@ -105,12 +92,7 @@ public class Numpad : MonoBehaviour {
 		GUI.EndGroup();
 	}
 
-	public void Clear(){
-		inputValue = null;
-		isDecimal = false;
-		displayText = "";
-		counterDecimal = 0;
-	}
+	
 
 	//value should never be above one digit
 	private void Input(int value){
@@ -152,5 +134,11 @@ public class Numpad : MonoBehaviour {
 
 	public string GetDisplayText(){
 		return displayText;
+	}
+	public void Clear(){
+		inputValue = null;
+		isDecimal = false;
+		displayText = "";
+		counterDecimal = 0;
 	}
 }

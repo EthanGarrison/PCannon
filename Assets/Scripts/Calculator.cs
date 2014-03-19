@@ -6,9 +6,9 @@ public class Calculator : MonoBehaviour {
 
 	//These are necessary for the calculator funtionality
 	private bool isDecimal = false,  isCalculated = false;
-	public string displayText = "0";
-	public string operSymbol = "";
-	public float varA = 0f, varB = 0f, counterDecimal = 0f;
+	private string displayText = "0";
+	private string operSymbol = "";
+	private float varA = 0f, varB = 0f, counterDecimal = 0f;
 	private float? firstValue = null, secondValue = null;
 	public GameMaster GM;
 
@@ -239,9 +239,9 @@ public class Calculator : MonoBehaviour {
 		float variable;
 
 		if(keyPressed == "A")
-		variable = varA;
+			variable = varA;
 		else
-		variable = varB;
+			variable = varB;
 		
 		if(firstValue != null && operSymbol != ""){
 			secondValue = variable;
@@ -258,23 +258,23 @@ public class Calculator : MonoBehaviour {
 
 		if(firstValue != null){
 			if(secondValue != null)
-			variable = (float)secondValue;
+				variable = (float)secondValue;
 			else
-			variable = (float)firstValue;
+				variable = (float)firstValue;
 		}
 		else
-		displayText = "ERROR";
+			displayText = "ERROR";
 		if(keyPressed == "A")
-		varA = variable;
+			varA = variable;
 		else
-		varB = variable;
+			varB = variable;
 	}
 
-	Rect createRRect(float y, float height){
+	private Rect createRRect(float y, float height){
 		return new Rect((bgCalc.width)*(1f/16),(bgCalc.height)*(y/17),(bgCalc.width)*(14f/16),(bgCalc.height)*(height/17));
 	}
 
-	Rect createBRect(float x){
+	private Rect createBRect(float x){
 		return new Rect(bgCalc.width*(x/16),0,(bgCalc.width*(2f/16)),bgCalc.height*(2f/17));
 	}
 
