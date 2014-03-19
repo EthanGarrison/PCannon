@@ -159,6 +159,7 @@ public class GameMaster : MonoBehaviour {
 
 	public void ClearInput(){
 		UserAnswer = "";
+		NumPad.GetComponent<Numpad>().Clear();
 	}
 
 }

@@ -105,7 +105,7 @@ public class Numpad : MonoBehaviour {
 		GUI.EndGroup();
 	}
 
-	private void Clear(){
+	public void Clear(){
 		inputValue = null;
 		isDecimal = false;
 		displayText = "";
