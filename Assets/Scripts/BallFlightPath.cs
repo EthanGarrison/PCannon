@@ -12,7 +12,7 @@ public class BallFlightPath : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
 	public void PlayShort(){		
