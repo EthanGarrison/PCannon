@@ -3,16 +3,14 @@ using System.Collections;
 
 public class CannonTouchScript : MonoBehaviour {
 
-	Ray touchInput;
-	RaycastHit2D cannonTouchTest;
-	string attachedName;
-	public GameObject GM;
-
-
+	private Ray touchInput;
+	private RaycastHit2D cannonTouchTest;
+	private string attachedName;
+	public GameMaster GM;
 	// Use this for initialization
 	void Start () {
 		//This is the name of the GameObject that this script is attached to.
-		attachedName = gameObject.transform.name;
+		attachedName = gameObject.name;
 	}
 	
 	// Update is called once per frame
@@ -23,14 +21,12 @@ public class CannonTouchScript : MonoBehaviour {
 			cannonTouchTest = Physics2D.GetRayIntersection(touchInput, Mathf.Infinity);
 
 			//If the hit object is the GameObject that this script is attached to and
-			//the cannon hasn't been fired, then call AnimateCannon() and FireBall()
-			if(cannonTouchTest.collider.name == attachedName && 
-				GM.GetComponent<GameMaster>().HasValidInput()
-				){
+			//the cannon hasn't been fired, then call AnimateCannon()
+			if(cannonTouchTest.collider.name == attachedName && GM.HasValidInput()){
 					AnimateCannon();	
-					GM.GetComponent<GameMaster>().ExecuteHitResult();		
+					GM.ExecuteHitResult();		
 			}
-			GM.GetComponent<GameMaster>().ClearInput();
+			GM.ClearInput();
 		}
 	}
 
