@@ -5,7 +5,7 @@ public class Numpad : MonoBehaviour {
 
 	private Rect numpadBg, group1, group2, group3, group4;
 	private Rect button1, button2, button3, helpButton;	
-	private string displayText = "";
+	public static string displayText = "";
 	private float? inputValue = null;
 	private float counterDecimal = 0f;
 	private bool isDecimal = false;
@@ -14,7 +14,7 @@ public class Numpad : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		numpadBg = new Rect(	GM.NativeWidth/4f,0,(GM.NativeWidth*(3f/4f)),GM.NativeHeight);
+		numpadBg = new Rect(	GameMaster.nativeWidth/4f,0,(GameMaster.nativeWidth*(3f/4f)),GameMaster.nativeHeight);
 		helpButton = new Rect(	numpadBg.width*(10f/13),numpadBg.height*(1f/13),numpadBg.width*(2f/13),numpadBg.height*(11f/13));
 		group1 = createRRect(1f);
 		group2 = createRRect(4f);
@@ -26,7 +26,7 @@ public class Numpad : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		GM.AutoResize(GM.NativeWidth, GM.NativeHeight);
+		GameMaster.AutoResize(GameMaster.nativeWidth,GameMaster.nativeHeight);
 		GUI.depth = 0;
 
 		GUI.BeginGroup(numpadBg);
@@ -85,7 +85,6 @@ public class Numpad : MonoBehaviour {
 
 			if(GUI.Button(helpButton, "Need Help?")){
 				DisplayCalculator();
-				GM.needHelpActive = true;
 			}
 
 		//End Main Group
@@ -132,9 +131,6 @@ public class Numpad : MonoBehaviour {
 		gameObject.SetActive(false);
 	}
 
-	public string GetDisplayText(){
-		return displayText;
-	}
 	public void Clear(){
 		inputValue = null;
 		isDecimal = false;

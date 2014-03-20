@@ -20,7 +20,7 @@ public class Calculator : MonoBehaviour {
 
 	void Start () {
 		//Initializing the variables
-		bgCalc = new Rect(	GM.NativeWidth/4,0,(GM.NativeWidth*(3f/4f)),GM.NativeHeight);
+		bgCalc = new Rect(	GameMaster.nativeWidth/4,0,(GameMaster.nativeWidth*(3f/4f)),GameMaster.nativeHeight);
 		labelRect = new Rect(bgCalc.width*(6f/16),0,bgCalc.width*(8f/16),bgCalc.height*(3f/17));
 		sendButton = new Rect(	0,0,bgCalc.width*(5f/16),bgCalc.height*(2.5f/16));
 
@@ -37,8 +37,7 @@ public class Calculator : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-		GM.AutoResize(GM.NativeWidth, GM.NativeHeight);
-		GUI.depth = 0;
+		GameMaster.AutoResize(GameMaster.nativeWidth,GameMaster.nativeHeight);
 
 		GUI.BeginGroup(bgCalc, calcBackground);
 

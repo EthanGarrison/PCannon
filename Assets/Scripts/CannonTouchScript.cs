@@ -24,7 +24,7 @@ public class CannonTouchScript : MonoBehaviour {
 
 			//If the hit object is the GameObject that this script is attached to and
 			//the cannon hasn't been fired, then call AnimateCannon()
-			if(cannonTouchTest.collider.name == attachedName && GM.HasValidInput()){
+			if(cannonTouchTest.collider.name == attachedName && GM.HasValidInput() && !GameStat.gameStatDisplayUp){
 					AnimateCannon();	
 					GM.ExecuteHitResult();		
 			}
