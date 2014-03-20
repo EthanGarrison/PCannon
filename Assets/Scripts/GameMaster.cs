@@ -24,10 +24,11 @@ public class GameMaster : MonoBehaviour {
 	public static int FuseLife = 10;
 	public static int point = 0;
 	public static int nativeWidth = 320, nativeHeight = 200;
+	private Rect userAnswerRect; 
 
 	void Start () {
 		LegGenerator();
-
+		userAnswerRect = new Rect(0, nativeHeight-15,75,15);
 
 	}
 	void Update(){
@@ -41,7 +42,7 @@ public class GameMaster : MonoBehaviour {
 		GUI.depth = 1;
 
 		if(!GameStat.gameStatDisplayUp && !GameOver.gameStatDisplayUp){
-			if(GUI.Button (new Rect(0, nativeHeight-15,75,15),UserAnswer)){//Toggles Numpad and Calculator
+			if(GUI.Button (userAnswerRect,UserAnswer)){//Toggles Numpad and Calculator
 				NumPad.SetActive(!toggleNumActive);
 				Calc.SetActive(false);
 				toggleNumActive = !toggleNumActive;
