@@ -3,10 +3,7 @@ using System.Collections;
 using System;
 
 public class GameMaster : MonoBehaviour {
-	public bool toggleNumActive = false;
-
-	public GameObject NumPad;
-	public GameObject Calc;
+	public Calculator Calc;
 	public BallFlightPath CannonBall;
 	public GameObject StatScreenPrefab;
 	public GameObject GameOverPrefab;
@@ -17,8 +14,8 @@ public class GameMaster : MonoBehaviour {
 	};
 	private double LegA, LegB, LegC;	
 	
-	public GUIStyle GUITheme;
-	public string UserAnswer= "";
+	//public GUIStyle GUITheme;
+	//public string UserAnswer= "";
 
 	public static int level = 1;
 	public static int FuseLife = 10;
@@ -32,9 +29,7 @@ public class GameMaster : MonoBehaviour {
 
 	}
 	void Update(){
-		if(NumPad.activeSelf){
-			UserAnswer = Numpad.displayText;
-		}
+			//UserAnswer = Calc.displayText;
 	}
 
 	private void OnGUI(){
@@ -42,18 +37,12 @@ public class GameMaster : MonoBehaviour {
 		GUI.depth = 1;
 
 		if(!GameStat.gameStatDisplayUp && !GameOver.gameStatDisplayUp){
-			if(GUI.Button (userAnswerRect,UserAnswer)){//Toggles Numpad and Calculator
-				NumPad.SetActive(!toggleNumActive);
-				Calc.SetActive(false);
-				toggleNumActive = !toggleNumActive;
-
-			}
 			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
 		}
 	}
 	
 	public void ExecuteHitResult(){//Executes the animation of the castle being hit range	
-		double UserAnswerDouble = Double.Parse(UserAnswer);
+		double UserAnswerDouble = Double.Parse(Calc.displayText);
 		//TODO: Round the Double	
 		if(UserAnswerDouble < LegC){
 			CannonBall.PlayShort();
@@ -72,10 +61,9 @@ public class GameMaster : MonoBehaviour {
 			LegGenerator();	
 		}
 
-		ClearInput();
-		toggleNumActive = false;
-		NumPad.SetActive(false);
-		Calc.SetActive(false);
+		Calc.Clear();
+		Calc.padDisplay = false;
+		Calc.functDisplay = false;
 		if(FuseLife <= 0)
 			Instantiate(GameOverPrefab);
 	}
@@ -119,12 +107,10 @@ public class GameMaster : MonoBehaviour {
 
 	public bool HasValidInput(){ //Checks if this is a valid input
 		double number;
-		return (UserAnswer != "" && Double.TryParse(UserAnswer, out number)? true : false);
+		return (Calc.displayText != "" && Double.TryParse(Calc.displayText, out number)? true : false);
 	}
 
 	public void ClearInput(){
-		UserAnswer = "";
-		NumPad.GetComponent<Numpad>().Clear();
+		Calc.Clear();
 	}
-
 }
