@@ -81,7 +81,7 @@ public class Calculator : MonoBehaviour {
 
 			if(padDisplay){
 				//Expand Button
-				if(GUI.Button(helpRect,"HELP!", calcLabel)){
+				if(GUI.Button(helpRect, functDisplay ? "" : "Help!", functDisplay ? calcBackground :calcLabel )){
 					functDisplay = true;
 				}
 
