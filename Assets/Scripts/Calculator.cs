@@ -5,10 +5,9 @@ using System;
 public class Calculator : MonoBehaviour {
 
 	//These are necessary for the calculator funtionality
-	private bool isDecimal = false,  isCalculated = false;
-	private string displayText = "0";
-	private string operSymbol = "";
-	private float varA = 0f, varB = 0f, counterDecimal = 0f;
+	private bool isDecimal = false,  isCalculated = false, isAddition = false;
+	private string displayText = "";
+	private float varA = 0f, varB = 0f;
 	private float? firstValue = null, secondValue = null;
 	public GameMaster GM;
 
@@ -35,6 +34,11 @@ public class Calculator : MonoBehaviour {
 		button4 = createBRect(9f);
 		button5 = createBRect(12f);
 	}
+
+	void Update(){
+		Debug.Log("First Value: " + firstValue);
+		Debug.Log("Second Value: " + secondValue);
+	}
 	
 	void OnGUI () {
 		GM.AutoResize(GM.NativeWidth, GM.NativeHeight);
@@ -58,13 +62,13 @@ public class Calculator : MonoBehaviour {
 				DisplayStoredValue("A");
 
 			if(GUI.Button(button2, "7", calcButton))
-				InputValue(7);
+				InputValue("7");
 
 			if(GUI.Button(button3, "8", calcButton))
-				InputValue(8);
+				InputValue("8");
 
 			if(GUI.Button(button4, "9", calcButton))
-				InputValue(9);
+				InputValue("9");
 
 			if(GUI.Button(button5, "Clr", calcButton))
 				Clear();
@@ -77,13 +81,13 @@ public class Calculator : MonoBehaviour {
 				StoreValue("A");
 
 			if(GUI.Button(button2, "4", calcButton))
-				InputValue(4);
+				InputValue("4");
 
 			if(GUI.Button(button3, "5", calcButton))
-				InputValue(5);
+				InputValue("5");
 
 			if(GUI.Button(button4, "6", calcButton))
-				InputValue(6);
+				InputValue("6");
 
 			if(GUI.Button(button5, "√", calcButton))
 				Calculate(null,"squareRoot");
@@ -96,13 +100,13 @@ public class Calculator : MonoBehaviour {
 				DisplayStoredValue("B");
 
 			if(GUI.Button(button2, "1", calcButton))
-				InputValue(1);
+				InputValue("1");
 
 			if(GUI.Button(button3, "2", calcButton))
-				InputValue(2);
+				InputValue("2");
 
 			if(GUI.Button(button4, "3", calcButton))
-				InputValue(3);
+				InputValue("3");
 
 			if(GUI.Button(button5, "X²", calcButton))
 				Calculate(null,"square");
@@ -115,25 +119,24 @@ public class Calculator : MonoBehaviour {
 				StoreValue("B");
 
 			if(GUI.Button(button2, "0", calcButton))
-				InputValue(0);
+				InputValue("0");
 
-			if(GUI.Button(button3, ".", calcButton))
+			if(GUI.Button(button3, ".", calcButton)){
+				InputValue(".");
 				isDecimal = true;
+			}
 
 			if(GUI.Button(button4, "=", calcButton)){
 				try{
-					Calculate((float)secondValue, operSymbol);
+					Calculate((float)secondValue, "+");
 				}
 				catch(Exception e){
 					Debug.Log("This is from the equals button: " + e);
 				}
 			}
 
-			if(GUI.Button(button5, "+", calcButton)){
-				operSymbol = "+";
-				counterDecimal = 0;
-				isDecimal = false;
-			}
+			if(GUI.Button(button5, "+", calcButton))
+				InputValue("+");
 
 			GUI.EndGroup();
 
@@ -161,7 +164,7 @@ public class Calculator : MonoBehaviour {
 			Debug.Log("Cannot square or Sqrt a null: " + e);
 		}
 		
-		if(!operSymbol.Equals("")){
+		if(!operSym.Equals("")){
 			Clear();
 			isCalculated = true;
 		}
@@ -174,64 +177,34 @@ public class Calculator : MonoBehaviour {
 	public void Clear(){
 		firstValue = null;
 		secondValue = null;
-		isDecimal = false;
-		counterDecimal = 0;
+		isAddition = false;
 		isCalculated = false;
+		isDecimal = false;
 		displayText =  "";
-		operSymbol = "";
 	}
 
 	//Value input function.  Checks to see which value we are working with and then if it already has a value
 	//If it has a value, we append the entered number onto the end of the number.
-	void InputValue(int val){
-		if(isCalculated && operSymbol.Equals("")){
-			firstValue = null;
+	void InputValue(string input){
+		if(isCalculated && isAddition)
+			displayText = "";
+
+		if(input == "."){
+			if(!isDecimal){
+				displayText += input;
+				GetValueOfInput();
+			}
 		}
-		if(!isDecimal){	
-			if(firstValue != null){
-				if(!operSymbol.Equals("")){				//If the operSymbol is not empty, then we have started inputing a second value
-					if(secondValue != null){
-						secondValue = (secondValue*10)+val;
-						displayText = secondValue + "";
-					}
-					else{
-						secondValue = (float)val;
-						displayText = secondValue + "";
-					}
-				}
-				else{
-					firstValue = (firstValue*10)+val;
-					displayText = firstValue + "";
-				}
-			}
-			else{
-				firstValue = (float)val;
-				displayText = firstValue + "";
-			}
+		else if(input != "+"){
+			displayText += input;
+			GetValueOfInput();
 		}
 		else{
-			counterDecimal++;
-			if(firstValue != null){
-				if(!operSymbol.Equals("")){					//If the operSymbol is not empty, then we have started inputing a second value
-					if(secondValue != null){
-						secondValue = secondValue+(val/(Mathf.Pow(10f, counterDecimal)));
-						displayText = secondValue + "";
-					}
-					else{
-						secondValue = (float)val/10f;
-						displayText = secondValue + "";
-					}
-				}
-				else{
-					firstValue = firstValue+(val/(Mathf.Pow(10f, counterDecimal)));
-					displayText = firstValue + "";
-				}
-			}
-			else{
-				firstValue = (float)val/10f;
-				displayText = firstValue + "";
-			}	
+			displayText = "";
+			isAddition = true;
+			isDecimal = false;
 		}
+
 		isCalculated = false;		
 	}
 
@@ -243,7 +216,7 @@ public class Calculator : MonoBehaviour {
 		else
 			variable = varB;
 		
-		if(firstValue != null && operSymbol != ""){
+		if(firstValue != null && isAddition){
 			secondValue = variable;
 			displayText = secondValue + "";
 		}
@@ -256,14 +229,11 @@ public class Calculator : MonoBehaviour {
 	void StoreValue(string keyPressed){
 		float variable = 0f;
 
-		if(firstValue != null){
-			if(secondValue != null)
-				variable = (float)secondValue;
-			else
-				variable = (float)firstValue;
-		}
+		if(isAddition)
+			variable = (float)secondValue;
 		else
-			displayText = "ERROR";
+			variable = (float)firstValue;
+
 		if(keyPressed == "A")
 			varA = variable;
 		else
@@ -278,8 +248,14 @@ public class Calculator : MonoBehaviour {
 		return new Rect(bgCalc.width*(x/16),0,(bgCalc.width*(2f/16)),bgCalc.height*(2f/17));
 	}
 
+	private void GetValueOfInput(){
+		if(!isAddition)
+			firstValue = Single.Parse(displayText);
+		else
+			secondValue = Single.Parse(displayText);
+	}
+
 	public string GetDisplayText(){
 		return displayText;
 	}
 }
-
