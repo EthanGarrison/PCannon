@@ -8,6 +8,7 @@ public class CannonTouchScript : MonoBehaviour {
 	private string attachedName;
 	public GameMaster GM;
 	Animator anim;
+	public Transform target;
 	// Use this for initialization
 	void Start () {
 		//This is the name of the GameObject that this script is attached to.

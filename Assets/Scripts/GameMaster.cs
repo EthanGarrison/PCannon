@@ -20,7 +20,7 @@ public class GameMaster : MonoBehaviour {
 	public static int level = 1;
 	public static int FuseLife = 10;
 	public static int point = 0;
-	public static int nativeWidth = 320, nativeHeight = 200;
+	public static int nativeWidth = 1920, nativeHeight = 1200;
 	private Rect userAnswerRect; 
 
 	void Start () {
@@ -35,6 +35,11 @@ public class GameMaster : MonoBehaviour {
 	private void OnGUI(){
 		AutoResize(nativeWidth, nativeHeight);	//Allows dynamic GUI Scaling.
 		GUI.depth = 1;
+
+		GUI.contentColor = Color.black;
+
+		GUILayout.Label("Leg A: " + LegA);
+		GUILayout.Label("Leg B: " + LegB);
 
 		if(!GameStat.gameStatDisplayUp && !GameOver.gameStatDisplayUp){
 			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
