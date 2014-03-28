@@ -6,7 +6,6 @@ public class GameMaster : MonoBehaviour {
 	public Calculator Calc;
 	public BallFlightPath CannonBall;
 	public GameObject StatScreenPrefab;
-	public GameObject GameOverPrefab;
 
 	int[,] BelowLvl10LegsAB = new int[10, 2] { 
 		{ 3, 4 }, { 5, 12 }, { 9, 12 }, { 12, 16 }, { 24, 7 }, 
@@ -14,7 +13,7 @@ public class GameMaster : MonoBehaviour {
 	};
 	private double LegA, LegB, LegC;	
 	
-	//public GUIStyle GUITheme;
+	public GUIStyle GUITheme;
 	//public string UserAnswer= "";
 
 	public static int level = 1;
@@ -38,10 +37,10 @@ public class GameMaster : MonoBehaviour {
 
 		GUI.contentColor = Color.black;
 
-		GUILayout.Label("Leg A: " + LegA);
-		GUILayout.Label("Leg B: " + LegB);
+		GUILayout.Label("Leg A: " + LegA, GUITheme);
+		GUILayout.Label("Leg B: " + LegB, GUITheme);
 
-		if(!GameStat.gameStatDisplayUp && !GameOver.gameStatDisplayUp){
+		if(!GameStat.gameStatDisplayUp){
 			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
 		}
 	}
@@ -70,7 +69,7 @@ public class GameMaster : MonoBehaviour {
 		Calc.padDisplay = false;
 		Calc.functDisplay = false;
 		if(FuseLife <= 0)
-			Instantiate(GameOverPrefab);
+			Instantiate(StatScreenPrefab);
 	}
 
 	private void IncPoint(int p){
