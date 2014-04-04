@@ -14,7 +14,6 @@ public class GameMaster : MonoBehaviour {
 	private double LegA, LegB, LegC;	
 	
 	public GUIStyle GUITheme;
-	//public string UserAnswer= "";
 
 	public static int level = 1;
 	public static int FuseLife = 10;
@@ -28,7 +27,6 @@ public class GameMaster : MonoBehaviour {
 
 	}
 	void Update(){
-			//UserAnswer = Calc.displayText;
 	}
 
 	private void OnGUI(){
