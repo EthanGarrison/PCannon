@@ -72,11 +72,12 @@ public class Calculator : MonoBehaviour {
 		GUI.depth = 0;
 
 		GUI.BeginGroup(bgCalc,calcBackground);
-			if(!GameStat.gameStatDisplayUp && !GameOver.gameStatDisplayUp)
+			if(!GameStat.gameStatDisplayUp){
 			//Calculator Label
-			if(GUI.Button(labelRect,displayText, calcLabel)){
-				padDisplay = !padDisplay;
-				functDisplay = false;
+				if(GUI.Button(labelRect,displayText, calcLabel)){
+					padDisplay = !padDisplay;
+					functDisplay = false;
+				}
 			}
 
 			if(padDisplay){
