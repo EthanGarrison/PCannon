@@ -12,7 +12,8 @@ public class Calculator : MonoBehaviour {
 	public GameMaster GM;
 
 	//These are the things for the layout
-	public GUIStyle calcButton, calcLabel, calcBackground;
+	public GUIStyle calcLabel, calcBackground, calcHelp, calcHelpActive;
+	public GUIStyle calcButton1, calcButton2, calcButton3, calcButton4;
 	private Rect button1, button2, button3, button4, labelRect, helpRect;
 	private Rect group1, group2, group3, group4, group5;
 	private Rect bgCalc;
@@ -74,7 +75,7 @@ public class Calculator : MonoBehaviour {
 		GUI.BeginGroup(bgCalc,calcBackground);
 			if(!GameStat.gameStatDisplayUp){
 			//Calculator Label
-				if(GUI.Button(labelRect,displayText, calcLabel)){
+				if(GUI.Button(labelRect, padDisplay ? displayText : "Input", calcLabel)){
 					padDisplay = !padDisplay;
 					functDisplay = false;
 				}
@@ -82,54 +83,54 @@ public class Calculator : MonoBehaviour {
 
 			if(padDisplay){
 				//Expand Button
-				if(GUI.Button(helpRect, functDisplay ? "" : "Help!", functDisplay ? calcBackground :calcLabel )){
+				if(GUI.Button(helpRect, "Help!", functDisplay ? calcHelpActive :calcHelp )){
 					functDisplay = true;
 				}
 
 
 				GUI.BeginGroup(group1);
-					if(GUI.Button(button1, "7", calcButton))
+					if(GUI.Button(button1, "7", calcButton1))
 						InputValue("7");
-					if(GUI.Button(button2, "4", calcButton))
+					if(GUI.Button(button2, "4", calcButton2))
 						InputValue("4");
-					if(GUI.Button(button3, "1", calcButton))
+					if(GUI.Button(button3, "1", calcButton3))
 						InputValue("1");
-					if(GUI.Button(button4, "0", calcButton))
+					if(GUI.Button(button4, "0", calcButton4))
 					InputValue("0");
 				GUI.EndGroup();
 
 				GUI.BeginGroup(group2);
-					if(GUI.Button(button1, "8", calcButton))
+					if(GUI.Button(button1, "8", calcButton1))
 						InputValue("8");
-					if(GUI.Button(button2, "5", calcButton))
+					if(GUI.Button(button2, "5", calcButton2))
 						InputValue("5");
-					if(GUI.Button(button3, "2", calcButton))
+					if(GUI.Button(button3, "2", calcButton3))
 						InputValue("2");
-					if(GUI.Button(button4, ".", calcButton))
+					if(GUI.Button(button4, ".", calcButton4))
 						InputValue(".");
 				GUI.EndGroup();
 				
 				GUI.BeginGroup(group3);
-					if(GUI.Button(button1, "9", calcButton))
+					if(GUI.Button(button1, "9", calcButton1))
 						InputValue("9");
-					if(GUI.Button(button2, "6", calcButton))
+					if(GUI.Button(button2, "6", calcButton2))
 						InputValue("6");
-					if(GUI.Button(button3, "3", calcButton))
+					if(GUI.Button(button3, "3", calcButton3))
 						InputValue("3");
-					if(GUI.Button(button4, "Clr", calcButton))
+					if(GUI.Button(button4, "Clr", calcButton4))
 						Clear();
 				GUI.EndGroup();
 
 			if(functDisplay){
 
 				GUI.BeginGroup(group4);
-					if(GUI.Button(button1, "√", calcButton))
+					if(GUI.Button(button1, "√", calcButton1))
 						Calculate(null,"squareRoot");
-					if(GUI.Button(button2, "X²", calcButton))
+					if(GUI.Button(button2, "X²", calcButton2))
 						Calculate(null,"square");
-					if(GUI.Button(button3, "+", calcButton))
+					if(GUI.Button(button3, "+", calcButton3))
 						InputValue("+");
-					if(GUI.Button(button4, "=", calcButton)){
+					if(GUI.Button(button4, "=", calcButton4)){
 						try{
 							Calculate((float)secondValue, "+");
 						}
@@ -140,13 +141,13 @@ public class Calculator : MonoBehaviour {
 				GUI.EndGroup();
 
 				GUI.BeginGroup(group5);
-					if(GUI.Button(button1, "A", calcButton))
+					if(GUI.Button(button1, "A", calcButton1))
 						DisplayStoredValue("A");
-					if(GUI.Button(button2, "s A", calcButton))
+					if(GUI.Button(button2, "s A", calcButton2))
 						StoreValue("A");
-					if(GUI.Button(button3, "B", calcButton))
+					if(GUI.Button(button3, "B", calcButton3))
 						DisplayStoredValue("B");
-					if(GUI.Button(button4, "s B", calcButton))
+					if(GUI.Button(button4, "s B", calcButton4))
 						StoreValue("B");
 				GUI.EndGroup();
 			}
