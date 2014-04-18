@@ -29,11 +29,11 @@ public class TitleScreenScript : MonoBehaviour {
 	void OnGUI() {
 		GameMaster.AutoResize(GameMaster.nativeWidth,GameMaster.nativeHeight);
 
-		if(GUI.Button(startRect, "Start Game", startButton)){
+		if(GUI.Button(startRect, "Play Game", startButton)){
 			Application.LoadLevel(1);
 		}
 
-		if(GUI.Button(exitRect, "Exit Game", exitButton) || Input.GetKeyDown(KeyCode.Escape)){
+		if(GUI.Button(exitRect, "", exitButton) || Input.GetKeyDown(KeyCode.Escape)){
 			Application.Quit();
 		}
 	}

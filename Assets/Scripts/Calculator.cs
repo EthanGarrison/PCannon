@@ -12,7 +12,7 @@ public class Calculator : MonoBehaviour {
 	public GameMaster GM;
 
 	//These are the things for the layout
-	public GUIStyle calcLabel, calcBackground, calcHelp, calcHelpActive;
+	public GUIStyle calcLabel, calcBackground, calcHelp;
 	public GUIStyle calcButton1, calcButton2, calcButton3, calcButton4;
 	private Rect button1, button2, button3, button4, labelRect, helpRect;
 	private Rect group1, group2, group3, group4, group5;
@@ -83,7 +83,7 @@ public class Calculator : MonoBehaviour {
 
 			if(padDisplay){
 				//Expand Button
-				if(GUI.Button(helpRect, "Help!", functDisplay ? calcHelpActive :calcHelp )){
+				if(GUI.Button(helpRect, functDisplay ? "" : "Help!", functDisplay ? calcBackground :calcHelp )){
 					functDisplay = true;
 				}
 

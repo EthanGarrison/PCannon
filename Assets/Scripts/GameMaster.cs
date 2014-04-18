@@ -19,12 +19,19 @@ public class GameMaster : MonoBehaviour {
 	public static int FuseLife = 10;
 	public static int point = 0;
 	public static int nativeWidth = 1920, nativeHeight = 1200;
-	private Rect userAnswerRect; 
+	private Rect userAnswerRect, exitRect;
+	public GUIStyle exitButton; 
 
 	void Start () {
 		LegGenerator();
 		userAnswerRect = new Rect(0, nativeHeight-15,75,15);
 
+		exitRect = new Rect(
+						GameMaster.nativeWidth*(28f/32),
+						GameMaster.nativeWidth*(1f/32),
+						GameMaster.nativeWidth*(3f/32),
+						GameMaster.nativeWidth*(3f/32)
+						);		
 	}
 	void Update(){
 	}
@@ -40,6 +47,10 @@ public class GameMaster : MonoBehaviour {
 
 		if(!GameStat.gameStatDisplayUp){
 			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
+		}
+
+		if(GUI.Button(exitRect, "", exitButton)){
+			Application.Quit();
 		}
 	}
 	
