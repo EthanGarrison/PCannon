@@ -42,15 +42,19 @@ public class GameMaster : MonoBehaviour {
 
 		GUI.contentColor = Color.black;
 
-		GUILayout.Label("Leg A: " + LegA, GUITheme);
-		GUILayout.Label("Leg B: " + LegB, GUITheme);
-
 		if(!GameStat.gameStatDisplayUp){
-			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose			
+			
+			GUILayout.Label("Leg A: " + LegA, GUITheme);
+			GUILayout.Label("Leg B: " + LegB, GUITheme);
+
+			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose
 		}
 
 		if(GUI.Button(exitRect, "", exitButton)){
-			Application.Quit();
+			if(Application.loadedLevel == 0)
+				Application.Quit();
+			else
+				Application.LoadLevel(0);
 		}
 	}
 	
