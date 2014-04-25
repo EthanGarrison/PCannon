@@ -426,7 +426,7 @@ MonoBehaviour:
   calcButton1:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: a51d1efe1c606364f9e95491010400f7, type: 3}
+      m_Background: {fileID: 2800000, guid: 230641bb8d0f24a45ad72435cc7e9fa6, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -485,7 +485,7 @@ MonoBehaviour:
   calcButton2:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 5049a4fbbdadccc48b80146517a3d7ea, type: 3}
+      m_Background: {fileID: 2800000, guid: a467cd4912024bf478096211e61319c4, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -544,7 +544,7 @@ MonoBehaviour:
   calcButton3:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: dde63651ad6b60a4b9b711202ed0c845, type: 3}
+      m_Background: {fileID: 2800000, guid: d7604ee449606904d893d231fd9d3eff, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -603,7 +603,7 @@ MonoBehaviour:
   calcButton4:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: d47942909bd3072418014ab5b2bba8de, type: 3}
+      m_Background: {fileID: 2800000, guid: 9d3ccf2d708f782419a2e19939b76cd9, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -815,7 +815,7 @@ MonoBehaviour:
   exitButton:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 925728c738fcd9e488801d9be2fb818f, type: 3}
+      m_Background: {fileID: 2800000, guid: 9d589d74ac81aa44cacac0d3fd3a565e, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}

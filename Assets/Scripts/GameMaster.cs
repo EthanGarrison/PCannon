@@ -16,7 +16,7 @@ public class GameMaster : MonoBehaviour {
 	public GUIStyle GUITheme;
 
 	public static int level = 1;
-	public static int FuseLife = 10;
+	public static int fuseLife = 10;
 	public static int point = 0;
 	public static int nativeWidth = 1920, nativeHeight = 1200;
 	private Rect userAnswerRect, exitRect;
@@ -47,7 +47,8 @@ public class GameMaster : MonoBehaviour {
 			GUILayout.Label("Leg A: " + LegA, GUITheme);
 			GUILayout.Label("Leg B: " + LegB, GUITheme);
 
-			if(GUILayout.Button ("Fire!")){ExecuteHitResult();} //For Debug Purpose
+			if(GUILayout.Button ("Fire!", GUITheme)){ExecuteHitResult();} //For Debug Purpose
+			if(GUILayout.Button ("Reset", GUITheme)){Reset();}  //For Debug Purpose
 		}
 
 		if(GUI.Button(exitRect, "", exitButton)){
@@ -63,12 +64,12 @@ public class GameMaster : MonoBehaviour {
 		//TODO: Round the Double	
 		if(UserAnswerDouble < LegC){
 			CannonBall.PlayShort();
-			FuseLife--;
+			fuseLife--;
 		}
 		else if(UserAnswerDouble > LegC){
 			CannonBall.PlayLong();
 			IncPoint(5);
-			FuseLife-=2;
+			fuseLife-=2;
 		}
 		else{
 			CannonBall.PlayExact();
@@ -81,7 +82,7 @@ public class GameMaster : MonoBehaviour {
 		Calc.Clear();
 		Calc.padDisplay = false;
 		Calc.functDisplay = false;
-		if(FuseLife <= 0)
+		if(fuseLife <= 0)
 			Instantiate(StatScreenPrefab);
 	}
 
@@ -129,5 +130,12 @@ public class GameMaster : MonoBehaviour {
 
 	public void ClearInput(){
 		Calc.Clear();
+	}
+
+	public static void Reset(){
+		level = 1;
+		fuseLife = 10;
+		point = 0;
+		Application.LoadLevel(1);
 	}
 }

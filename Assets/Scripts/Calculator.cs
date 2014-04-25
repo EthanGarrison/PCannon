@@ -75,7 +75,7 @@ public class Calculator : MonoBehaviour {
 		GUI.BeginGroup(bgCalc,calcBackground);
 			if(!GameStat.gameStatDisplayUp){
 			//Calculator Label
-				if(GUI.Button(labelRect, padDisplay ? displayText : "Input", calcLabel)){
+				if(GUI.Button(labelRect, displayText, calcLabel)){
 					padDisplay = !padDisplay;
 					functDisplay = false;
 				}
