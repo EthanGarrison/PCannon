@@ -249,7 +249,7 @@ MonoBehaviour:
   calcLabel:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: dc89690e517984f46be4fd7778d4a79f, type: 3}
+      m_Background: {fileID: 2800000, guid: b43f7a70b231ff2439c1426727c7fe7b, type: 3}
       m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_Hover:
       m_Background: {fileID: 0}

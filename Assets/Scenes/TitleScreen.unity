@@ -104,7 +104,7 @@ MonoBehaviour:
   startButton:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 00037fd4fc7276b46b770806668ea37c, type: 3}
+      m_Background: {fileID: 2800000, guid: 988ff8628c8d9d745bc01169e2be6ae8, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   exitButton:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 925728c738fcd9e488801d9be2fb818f, type: 3}
+      m_Background: {fileID: 2800000, guid: 2b83ab6a84db0954c8e1a987b9f21672, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -374,7 +374,7 @@ MonoBehaviour:
   exitButton:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 925728c738fcd9e488801d9be2fb818f, type: 3}
+      m_Background: {fileID: 2800000, guid: 2b83ab6a84db0954c8e1a987b9f21672, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
