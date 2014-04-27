@@ -52,10 +52,9 @@ public class GameMaster : MonoBehaviour {
 		}
 
 		if(GUI.Button(exitRect, "", exitButton)){
-			if(Application.loadedLevel == 0)
-				Application.Quit();
-			else
-				Application.LoadLevel(0);
+			Reset();
+			GameStat.Destroy(gameObject, 0f);
+			Application.LoadLevel(0);
 		}
 	}
 	

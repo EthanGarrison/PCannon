@@ -58,4 +58,8 @@ public class GameStat : MonoBehaviour {
 			}
 		GUI.EndGroup ();
 	}
+
+	void OnDestroy(){
+		gameStatDisplayUp = false;
+	}
 }
