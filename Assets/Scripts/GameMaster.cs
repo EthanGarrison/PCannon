@@ -19,14 +19,14 @@ public class GameMaster : MonoBehaviour {
 	public static int fuseLife = 10;
 	public static int point = 0;
 	public static int nativeWidth = 1920, nativeHeight = 1200;
-	private Rect userAnswerRect, returnRect;
+	private Rect userAnswerRect, exitRect;
 	public GUIStyle exitButton; 
 
 	void Start () {
 		LegGenerator();
 		userAnswerRect = new Rect(0, nativeHeight-15,75,15);
 
-		returnRect = new Rect(
+		exitRect = new Rect(
 						GameMaster.nativeWidth*(28f/32),
 						GameMaster.nativeWidth*(1f/32),
 						GameMaster.nativeWidth*(3f/32),
