@@ -308,7 +308,7 @@ MonoBehaviour:
   calcBackground:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 0}
+      m_Background: {fileID: 2800000, guid: 6051f924579c10548b6f0dfea8f2a174, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
@@ -367,7 +367,7 @@ MonoBehaviour:
   calcHelp:
     m_Name: 
     m_Normal:
-      m_Background: {fileID: 2800000, guid: a51d1efe1c606364f9e95491010400f7, type: 3}
+      m_Background: {fileID: 2800000, guid: 230641bb8d0f24a45ad72435cc7e9fa6, type: 3}
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_Hover:
       m_Background: {fileID: 0}

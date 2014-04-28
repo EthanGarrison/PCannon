@@ -5,7 +5,7 @@ public class GameStat : MonoBehaviour {
 
 	public static bool gameStatDisplayUp = false;	
 	private Rect statDisplay,  label, button, gameOverDisplay;
-	public GUIStyle fontLabel,fontButton,gameStatStyle;
+	public GUIStyle victoryLabel, fontLabel, fontButton, gameStatStyle;
 	// Use this for initialization
 	void Start () {
 		gameStatDisplayUp = true;
@@ -31,14 +31,15 @@ public class GameStat : MonoBehaviour {
 		GameMaster.AutoResize(GameMaster.nativeWidth,GameMaster.nativeHeight);
 			if(GameMaster.fuseLife > 0){
 				GUI.BeginGroup (statDisplay, gameStatStyle);
-				GUI.Label(new  Rect(statDisplay.width* (2.5f/15),statDisplay.height* (2.5f/17), statDisplay.width * (10f/15),statDisplay.height * (3f/17)),
-				"Victory!",fontLabel);
-			//	GUI.Label(new  Rect(statDisplay.width* (2.5f/15),statDisplay.height* (2.5f/17), statDisplay.width * (10f/15),statDisplay.height * (3f/17)),
-			//	"Next Level"+ " : " + GameMaster.level + "\n" +
-			//	"Fuse Life: " + GameMaster.fuseLife + "\n" +
-			//	"Total Points : " + GameMaster.point + "\n",fontLabel);
+				GUI.Label(new  Rect(statDisplay.width* (2f/15),statDisplay.height* (2f/17), statDisplay.width * (10f/15),statDisplay.height * (3f/17)),
+				"Victory!",victoryLabel);
+
+				GUI.Label(new  Rect(statDisplay.width* (2f/15),statDisplay.height* (6f/17), statDisplay.width * (10f/15),statDisplay.height * (6f/17)),
+				"Level: " + GameMaster.level + "\n" +
+				"Score: " +  GameMaster.point + "\n" +
+				"Lives " + GameMaster.fuseLife + "\n",fontLabel);
 				
-				if(GUI.Button (new Rect (statDisplay.width/2f-100f,statDisplay.height-150f,200f,100f), "OK",fontButton)){
+				if(GUI.Button (new Rect (statDisplay.width* (8f/15),statDisplay.height* (13f/17),statDisplay.width * (5f/15),statDisplay.height * (2f/17)), "OK",fontButton)){
 					gameStatDisplayUp = false;
 					Object.Destroy(gameObject, 0f);
 				}

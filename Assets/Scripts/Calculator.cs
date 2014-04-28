@@ -91,46 +91,46 @@ public class Calculator : MonoBehaviour {
 				GUI.BeginGroup(group1);
 					if(GUI.Button(button1, "7", calcButton1))
 						InputValue("7");
-					if(GUI.Button(button2, "4", calcButton2))
+					if(GUI.Button(button2, "4", calcButton3))
 						InputValue("4");
-					if(GUI.Button(button3, "1", calcButton3))
+					if(GUI.Button(button3, "1", calcButton2))
 						InputValue("1");
 					if(GUI.Button(button4, "0", calcButton4))
 					InputValue("0");
 				GUI.EndGroup();
 
 				GUI.BeginGroup(group2);
-					if(GUI.Button(button1, "8", calcButton1))
+					if(GUI.Button(button1, "8", calcButton4))
 						InputValue("8");
 					if(GUI.Button(button2, "5", calcButton2))
 						InputValue("5");
 					if(GUI.Button(button3, "2", calcButton3))
 						InputValue("2");
-					if(GUI.Button(button4, ".", calcButton4))
+					if(GUI.Button(button4, ".", calcButton1))
 						InputValue(".");
 				GUI.EndGroup();
 				
 				GUI.BeginGroup(group3);
-					if(GUI.Button(button1, "9", calcButton1))
+					if(GUI.Button(button1, "9", calcButton3))
 						InputValue("9");
-					if(GUI.Button(button2, "6", calcButton2))
+					if(GUI.Button(button2, "6", calcButton1))
 						InputValue("6");
-					if(GUI.Button(button3, "3", calcButton3))
+					if(GUI.Button(button3, "3", calcButton4))
 						InputValue("3");
-					if(GUI.Button(button4, "Clr", calcButton4))
+					if(GUI.Button(button4, "Clr", calcButton2))
 						Clear();
 				GUI.EndGroup();
 
 			if(functDisplay){
 
 				GUI.BeginGroup(group4);
-					if(GUI.Button(button1, "√", calcButton1))
+					if(GUI.Button(button1, "√", calcButton2))
 						Calculate(null,"squareRoot");
-					if(GUI.Button(button2, "X²", calcButton2))
+					if(GUI.Button(button2, "X²", calcButton4))
 						Calculate(null,"square");
-					if(GUI.Button(button3, "+", calcButton3))
+					if(GUI.Button(button3, "+", calcButton1))
 						InputValue("+");
-					if(GUI.Button(button4, "=", calcButton4)){
+					if(GUI.Button(button4, "=", calcButton3)){
 						try{
 							Calculate((float)secondValue, "+");
 						}
@@ -141,13 +141,13 @@ public class Calculator : MonoBehaviour {
 				GUI.EndGroup();
 
 				GUI.BeginGroup(group5);
-					if(GUI.Button(button1, "A", calcButton1))
+					if(GUI.Button(button1, "A", calcButton3))
 						DisplayStoredValue("A");
-					if(GUI.Button(button2, "s A", calcButton2))
+					if(GUI.Button(button2, "s A", calcButton1))
 						StoreValue("A");
-					if(GUI.Button(button3, "B", calcButton3))
+					if(GUI.Button(button3, "B", calcButton4))
 						DisplayStoredValue("B");
-					if(GUI.Button(button4, "s B", calcButton4))
+					if(GUI.Button(button4, "s B", calcButton2))
 						StoreValue("B");
 				GUI.EndGroup();
 			}
