@@ -51,9 +51,10 @@ public class GameMaster : MonoBehaviour {
 			if(GUILayout.Button ("Reset", GUITheme)){Reset();}  //For Debug Purpose
 		}
 
-		if(GUI.Button(returnRect, "", exitButton)){
-				GameStat.Destroy(gameObject, 0f);
-				Application.LoadLevel(0);
+		if(GUI.Button(exitRect, "", exitButton)){
+			Reset();
+			GameStat.Destroy(gameObject, 0f);
+			Application.LoadLevel(0);
 		}
 	}
 	
