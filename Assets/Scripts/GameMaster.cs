@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -19,18 +19,29 @@ public class GameMaster : MonoBehaviour {
 	public static int fuseLife = 10;
 	public static int point = 0;
 	public static int nativeWidth = 1920, nativeHeight = 1200;
-	private Rect userAnswerRect, exitRect;
+	private Rect userAnswerRect, exitRect, legARect, legBRect;
+	private Rect fireRect, resetRect; //Debug Purposes
 	public GUIStyle exitButton; 
 
 	void Start () {
 		LegGenerator();
 		userAnswerRect = new Rect(0, nativeHeight-15,75,15);
 
+		legARect = new Rect(GameMaster.nativeWidth*(1f/32),GameMaster.nativeHeight*(1f/20),GameMaster.nativeWidth*(6f/32),GameMaster.nativeHeight*(2f/32));
+
+		legBRect = new Rect(GameMaster.nativeWidth*(1f/32),GameMaster.nativeHeight*(3f/20),GameMaster.nativeWidth*(6f/32),GameMaster.nativeHeight*(2f/20));
+		
+		//Debug purposes
+		fireRect = new Rect(GameMaster.nativeWidth*(1f/32),GameMaster.nativeHeight*(5f/20),GameMaster.nativeWidth*(6f/32),GameMaster.nativeHeight*(2f/20));
+		//Debug purposes
+		resetRect = new Rect(GameMaster.nativeWidth*(1f/32),GameMaster.nativeHeight*(7f/20),GameMaster.nativeWidth*(6f/32),GameMaster.nativeHeight*(2f/20));
+
+		
 		exitRect = new Rect(
 						GameMaster.nativeWidth*(28f/32),
-						GameMaster.nativeWidth*(1f/32),
+						GameMaster.nativeHeight*(1f/20),
 						GameMaster.nativeWidth*(3f/32),
-						GameMaster.nativeWidth*(3f/32)
+						GameMaster.nativeHeight*(3f/20)
 						);		
 	}
 	void Update(){
@@ -44,11 +55,10 @@ public class GameMaster : MonoBehaviour {
 
 		if(!GameStat.gameStatDisplayUp){
 			
-			GUILayout.Label("Leg A: " + LegA, GUITheme);
-			GUILayout.Label("Leg B: " + LegB, GUITheme);
-
-			if(GUILayout.Button ("Fire!", GUITheme)){ExecuteHitResult();} //For Debug Purpose
-			if(GUILayout.Button ("Reset", GUITheme)){Reset();}  //For Debug Purpose
+			GUI.Label(legARect, "Leg A: " + LegA, GUITheme);
+			GUI.Label(legBRect, "Leg B: " + LegB, GUITheme);
+			if(GUI.Button (fireRect, "Fire!", GUITheme)){ExecuteHitResult();} //For Debug Purpose
+			if(GUI.Button (resetRect, "Reset", GUITheme)){Reset();}  //For Debug Purpose
 		}
 
 		if(GUI.Button(exitRect, "", exitButton)){
