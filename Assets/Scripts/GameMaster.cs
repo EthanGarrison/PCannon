@@ -57,7 +57,7 @@ public class GameMaster : MonoBehaviour {
 			
 			GUI.Label(legARect, "Leg A: " + LegA, GUITheme);
 			GUI.Label(legBRect, "Leg B: " + LegB, GUITheme);
-			if(GUI.Button (fireRect, "Fire!", GUITheme)){ExecuteHitResult();} //For Debug Purpose
+			//if(GUI.Button (fireRect, "Fire!", GUITheme)){ExecuteHitResult();} //For Debug Purpose
 			if(GUI.Button (resetRect, "Reset", GUITheme)){Reset();}  //For Debug Purpose
 		}
 
