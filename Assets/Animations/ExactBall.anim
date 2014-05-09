@@ -17,15 +17,15 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: -4.96425629, y: -1.02452838, z: 0}
-        inSlope: {x: 22.9181137, y: 10.0926332, z: 0}
-        outSlope: {x: 22.9181137, y: 10.0926332, z: 0}
-        tangentMode: 596687024
+        value: {x: -5.7364974, y: -3.34125185, z: 0}
+        inSlope: {x: 16.534256, y: 11.3282185, z: 0}
+        outSlope: {x: 16.534256, y: 11.3282185, z: 0}
+        tangentMode: 0
       - time: .5
-        value: {x: 6.49480104, y: 4.02178812, z: 0}
-        inSlope: {x: 22.9181137, y: 10.0926332, z: 0}
-        outSlope: {x: 22.9181137, y: 10.0926332, z: 0}
-        tangentMode: 596869964
+        value: {x: 2.53063059, y: 2.32285762, z: 0}
+        inSlope: {x: 16.534256, y: 11.3282185, z: 0}
+        outSlope: {x: 16.534256, y: 11.3282185, z: 0}
+        tangentMode: 4
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -78,14 +78,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -4.96425629
-        inSlope: 22.9181137
-        outSlope: 22.9181137
+        value: -5.7364974
+        inSlope: 16.534256
+        outSlope: 16.534256
         tangentMode: 10
       - time: .5
-        value: 6.49480104
-        inSlope: 22.9181137
-        outSlope: 22.9181137
+        value: 2.53063059
+        inSlope: 16.534256
+        outSlope: 16.534256
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -97,14 +97,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -1.02452838
-        inSlope: 10.0926332
-        outSlope: 10.0926332
+        value: -3.34125185
+        inSlope: 11.3282185
+        outSlope: 11.3282185
         tangentMode: 10
       - time: .5
-        value: 4.02178812
-        inSlope: 10.0926332
-        outSlope: 10.0926332
+        value: 2.32285762
+        inSlope: 11.3282185
+        outSlope: 11.3282185
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2

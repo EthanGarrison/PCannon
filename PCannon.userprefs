@@ -1,12 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\FireCannon.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameMaster.cs">
     <Files>
-      <File FileName="Assets\Scripts\GameSetup.js" Line="16" Column="32" />
-      <File FileName="..\BrackeyTutorialPong\Assets\BallControl.js" Line="6" Column="46" />
-      <File FileName="..\BrackeyTutorialPong\Assets\PlayerControl.js" Line="3" Column="1" />
-      <File FileName="Assets\Scripts\FireCannon.cs" Line="28" Column="6" />
-      <File FileName="Assets\cannonBallControl.js" Line="4" Column="27" />
+      <File FileName="Assets\Scripts\GameMaster.cs" Line="60" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -17,15 +17,15 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: -5.01102209, y: -1.14293778, z: 0}
-        inSlope: {x: 27.012043, y: 1.66877007, z: 0}
-        outSlope: {x: 27.012043, y: 1.66877007, z: 0}
-        tangentMode: 0
+        value: {x: -5.70525074, y: -3.33242989, z: 0}
+        inSlope: {x: 14.0479136, y: 4.04147768, z: 0}
+        outSlope: {x: 14.0479136, y: 4.04147768, z: 0}
+        tangentMode: 1702060354
       - time: .5
-        value: {x: 8.49499893, y: -.308552742, z: 0}
-        inSlope: {x: 27.012043, y: 1.66877007, z: 0}
-        outSlope: {x: 27.012043, y: 1.66877007, z: 0}
-        tangentMode: 4
+        value: {x: 1.31870604, y: -1.31169105, z: 0}
+        inSlope: {x: 14.0479136, y: 4.04147768, z: 0}
+        outSlope: {x: 14.0479136, y: 4.04147768, z: 0}
+        tangentMode: 719241308
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -78,14 +78,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -5.01102209
-        inSlope: 27.012043
-        outSlope: 27.012043
+        value: -5.70525074
+        inSlope: 14.0479136
+        outSlope: 14.0479136
         tangentMode: 10
       - time: .5
-        value: 8.49499893
-        inSlope: 27.012043
-        outSlope: 27.012043
+        value: 1.31870604
+        inSlope: 14.0479136
+        outSlope: 14.0479136
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -97,14 +97,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: -1.14293778
-        inSlope: 1.66877007
-        outSlope: 1.66877007
+        value: -3.33242989
+        inSlope: 4.04147768
+        outSlope: 4.04147768
         tangentMode: 10
       - time: .5
-        value: -.308552742
-        inSlope: 1.66877007
-        outSlope: 1.66877007
+        value: -1.31169105
+        inSlope: 4.04147768
+        outSlope: 4.04147768
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
